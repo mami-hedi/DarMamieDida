@@ -1,0 +1,339 @@
+{
+  "hero": {
+    "title": "Dar Mamie Dida",
+    "subtitle": "An exceptional guesthouse where elegance meets comfort. Discover a peaceful haven at the heart of tradition and refinement.",
+    "btnRooms": "Discover our rooms",
+    "btnAvailability": "Check Availability"
+  },
+
+  "welcome": {
+    "title": "Welcome to our home",
+    "description": "Nestled in an idyllic setting, Dar Mamie Dida opens its doors for an unforgettable stay. Our guesthouse combines traditional architecture with modern comfort, creating a unique atmosphere where every detail is designed for your well-being.",
+    "features": {
+      "rooms": {
+        "title": "6 Unique Rooms",
+        "description": "Each room has its own identity and unique character."
+      },
+      "service": {
+        "title": "Excellence in Service",
+        "description": "A warm welcome and attentive service at every moment."
+      },
+      "family": {
+        "title": "Family Atmosphere",
+        "description": "A friendly atmosphere where you will feel at home."
+      }
+    }
+  },
+  "services": {
+  "hero": {
+    "title": "Our Services",
+    "subtitle": "Everything for a comfortable and authentic stay"
+  },
+  "intro": {
+    "description": "High-quality services for your comfort and well-being."
+  },
+  "main": [
+    {
+      "title": "Breakfast",
+      "description": "Generous breakfast prepared with fresh and local products, served on the terrace."
+    },
+    {
+      "title": "Free Wi-Fi",
+      "description": "High-speed Wi-Fi available throughout the house and outdoor areas."
+    },
+    {
+      "title": "Private Parking",
+      "description": "Free and secure parking for all our guests."
+    },
+    {
+      "title": "Panoramic Terraces",
+      "description": "Outdoor spaces designed to enjoy the sun and the view."
+    },
+    {
+      "title": "Local Cuisine",
+      "description": "Discover traditional Tunisian cuisine on request."
+    },
+    {
+      "title": "Personalized Service",
+      "description": "Special attention for a comfortable and tailored stay."
+    }
+  ],
+  "breakfast": {
+    "title": "An Exceptional Breakfast",
+    "description": "Fresh, local, homemade products to start your day in a peaceful setting.",
+    "items": ["Local products", "Seasonal fruits", "Artisanal pastries", "Panoramic view"]
+  },
+  "activities": {
+    "title": "Activities & Discoveries",
+    "intro": "Discover our activities and nearby wonders to enrich your stay.",
+    "items": [
+      {
+        "title": "Beaches & Coves",
+        "description": "Quick access to sandy beaches and wild coves."
+      },
+      {
+        "title": "Hiking & Walks",
+        "description": "Natural trails offering exceptional panoramas."
+      },
+      {
+        "title": "Cultural Discoveries",
+        "description": "Traditional villages, historical sites, and local crafts."
+      },
+      {
+        "title": "Local Gastronomy",
+        "description": "Typical restaurants and regional specialties nearby."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready for your stay?",
+    "description": "Check our rooms and book in a few clicks.",
+    "button": "See the rooms"
+  }
+},
+
+  "rooms": {
+    "title": "Our Rooms",
+    "description": "Discover our carefully decorated rooms, each bearing a name dear to our heart and offering a unique experience.",
+    "btn": "View all rooms",
+    "price": "From {{price}}DT / night",
+
+    "hero": {
+      "title": "Our Rooms",
+      "subtitle": "Five unique atmospheres for an exceptional stay"
+    },
+
+    "included": {
+      "title": "Included in every stay",
+      "items": ["Breakfast", "Free Wi-Fi", "Parking", "House linen"]
+    },
+
+    "buttons": {
+      "details": "View details",
+      "reserve": "Reserve"
+    },
+
+    "detail": {
+      "back": "Back to rooms",
+      "people": "people",
+      "night": "night",
+      "descriptionTitle": "Description",
+      "amenitiesTitle": "Amenities & Services",
+      "amenities": [
+    "Free Wi-Fi",
+    "Air conditioning",
+    "Private bathroom",
+    "Television",
+    "Breakfast included"
+  ]
+    }
+  },
+
+  "gallery": {
+    "title": "A glimpse of our guesthouse",
+    "description": "Immerse yourself in the elegant and authentic atmosphere of Dar Mamie Dida through a selection of images from our spaces.",
+    "btn": "View full gallery",
+
+    "hero": {
+      "title": "Gallery",
+      "subtitle": "Discover our rooms and spaces through our gallery"
+    },
+
+    "video": {
+      "title": "Discover our video",
+      "description": "A glimpse of our rooms, common areas, and the experiences we offer."
+    },
+
+    "photosAlt": [
+      "Room photo 1",
+      "Room photo 2",
+      "Room photo 3",
+      "Room photo 4",
+      "Room photo 5",
+      "Room photo 6",
+      "Room photo 7",
+      "Room photo 8",
+      "Room photo 9",
+      "Room photo 10",
+      "Room photo 11",
+      "Room photo 12"
+    ]
+  },
+
+  "reservation": {
+    "title": "Book now",
+    "description": "Book now and let us offer you an exceptional experience. Our team will be delighted to welcome you and make your stay unforgettable.",
+    "btn": "Book now",
+
+    "modal": {
+      "title": "Book this room",
+      "subtitle": "Fill in the form to submit your booking request.",
+      "priceSuffix": "/ night",
+      "submit": "Book now",
+      "note": "Breakfast included • Free cancellation"
+    }
+  },
+
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "gallery": "Gallery",
+    "rooms": "Our Rooms",
+    "contact": "Contact",
+    "availability": "Check Availability"
+  },
+
+  "footer": {
+    "description": "An exceptional guesthouse where comfort meets elegance. Your haven of peace for an unforgettable stay.",
+    "otherLinks": "Other links",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "address": "Cité Nouira Avenue Hedi Nouira 8050 Hammamet, Tunisia",
+    "rights": "All rights reserved"
+  },
+
+  "about": {
+    "hero": {
+      "title": "About",
+      "subtitle": "Discover the story of Dar Mamie Dida"
+    },
+    "story": {
+      "title": "Our Story",
+      "p1": "Dar Mamie Dida was born from a dream: to create a place where every traveler feels at home.",
+      "p2": "Each room bears the name of a family member, telling a unique story.",
+      "p3": "Our mission is to provide you with a memorable stay in an authentic setting."
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "The principles that guide our hospitality.",
+      "hospitality": {
+        "title": "Hospitality",
+        "description": "A warm and sincere welcome."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Every detail matters for your comfort."
+      },
+      "tradition": {
+        "title": "Tradition",
+        "description": "Respecting traditions with modern comfort."
+      },
+      "authenticity": {
+        "title": "Authenticity",
+        "description": "A genuine and human experience."
+      }
+    },
+    "reviews": {
+      "title": "Guest Reviews",
+      "subtitle": "What our guests say",
+      "r1": "Magical stay!",
+      "r2": "Comfortable room.",
+      "r3": "Unique experience.",
+      "r4": "Attentive staff.",
+      "r5": "Warm welcome!",
+      "r6": "Beautiful house."
+    },
+    "team": {
+      "title": "A Dedicated Team",
+      "p1": "A passionate team at your service.",
+      "p2": "Our goal: to make you want to come back."
+    }
+  },
+
+  "contact": {
+    "hero": {
+      "title": "Contact",
+      "subtitle": "We are here to help"
+    },
+    "info": {
+      "title": "Get in touch",
+      "description": "Have a question? Feel free to contact us. For reservations, please visit each room’s page.",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "addressValue": "Cité Nouira, Avenue Hedi Nouira, 8050 Hammamet, Tunisia",
+      "hours": "Reception hours",
+      "checkin": "Check-in: 3:00 PM – 8:00 PM",
+      "checkout": "Check-out: before 11:00 AM"
+    },
+    "form": {
+      "title": "Send us a message",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "subjectPlaceholder": "Message subject",
+      "messagePlaceholder": "Your message...",
+      "send": "Send",
+      "sending": "Sending...",
+      "successTitle": "Message sent!",
+      "successDescription": "We will get back to you as soon as possible."
+    }
+  },
+  "availability": {
+    "title": "Check Availability",
+    "checkin": "Check-in Date",
+    "checkout": "Check-out Date",
+    "search": "Search",
+    "alert": {
+      "selectBothDates": "Please select both dates.",
+      "checkoutAfterCheckin": "Check-out date must be after check-in date."
+    }
+  },
+  "checkRooms": {
+    "title": "Check Available Rooms",
+    "loading": "Loading...",
+    "availableRooms": "Available Rooms",
+    "noRooms": "No rooms to display",
+    "reserve": "Reserve",
+    "currency": "TND",
+    "night": "night",
+    "alert": {
+      "pastDate": "You cannot select a past date.",
+      "checkoutAfterCheckin": "Check-out date must be after check-in date.",
+      "serverError": "Server error",
+      "invalidData": "Invalid data format."
+    }
+  
+}
+,
+
+  "faq": {
+    "hero": {
+      "title": "FAQ",
+      "subtitle": "Find answers to the most frequently asked questions"
+    },
+    "items": [
+      {
+        "question": "How can I book a room?",
+        "answer": "You can book directly on our website by clicking the “Book now” button on each room page, or contact us easily via WhatsApp."
+      },
+      {
+        "question": "Can I cancel or modify my reservation?",
+        "answer": "Yes, you can cancel or modify your reservation free of charge up to 48 hours before arrival."
+      },
+      {
+        "question": "What are the check-in and check-out times?",
+        "answer": "Check-in is available from 2:00 PM and check-out must be completed before 11:00 AM."
+      },
+      {
+        "question": "Is breakfast included?",
+        "answer": "Yes, breakfast is included in all our rooms at no extra cost."
+      },
+      {
+        "question": "Are pets allowed?",
+        "answer": "Unfortunately, pets are not allowed for the comfort of all guests."
+      },
+      {
+        "question": "Do you have parking?",
+        "answer": "Yes, free and secure parking is available."
+      },
+      {
+        "question": "Is Wi-Fi available?",
+        "answer": "Yes, high-speed Wi-Fi is available for free in all rooms and common areas."
+      }
+    ]
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "hero": {
+    "title": "Dar Mamie Dida",
+    "subtitle": "Une maison d’hôtes d’exception où l’élégance rencontre le confort. Découvrez un havre de paix au cœur de la tradition et du raffinement.",
+    "btnRooms": "Découvrir nos chambres",
+    "btnAvailability": "Vérifier la disponibilité"
+  },
+
+  "welcome": {
+    "title": "Bienvenue chez nous",
+    "description": "Nichée dans un cadre idyllique, Dar Mamie Dida vous ouvre ses portes pour un séjour inoubliable. Notre maison d’hôtes allie architecture traditionnelle et confort moderne, créant une atmosphère unique où chaque détail est pensé pour votre bien-être.",
+    "features": {
+      "rooms": {
+        "title": "6 Chambres uniques",
+        "description": "Chaque chambre possède son identité et son caractère."
+      },
+      "service": {
+        "title": "Service d’excellence",
+        "description": "Un accueil chaleureux et un service attentionné."
+      },
+      "family": {
+        "title": "Ambiance familiale",
+        "description": "Une atmosphère conviviale où vous vous sentirez chez vous."
+      }
+    }
+  },
+
+  "services": {
+  "hero": {
+    "title": "Nos Services",
+    "subtitle": "Tout pour un séjour confortable et authentique"
+  },
+  "intro": {
+    "description": "Des prestations de qualité pour votre confort et votre bien-être."
+  },
+  "main": [
+    {
+      "title": "Petit-déjeuner",
+      "description": "Petit-déjeuner généreux préparé avec des produits frais et locaux, servi sur la terrasse."
+    },
+    {
+      "title": "Wi-Fi gratuit",
+      "description": "Connexion Wi-Fi haut débit disponible dans toute la maison et les espaces extérieurs."
+    },
+    {
+      "title": "Parking privé",
+      "description": "Stationnement gratuit et sécurisé pour tous nos hôtes."
+    },
+    {
+      "title": "Terrasses panoramiques",
+      "description": "Espaces extérieurs aménagés pour profiter du soleil et de la vue."
+    },
+    {
+      "title": "Cuisine locale",
+      "description": "Découverte de la cuisine tunisienne traditionnelle sur demande."
+    },
+    {
+      "title": "Service personnalisé",
+      "description": "Une attention particulière pour un séjour confortable et sur mesure."
+    }
+  ],
+  "breakfast": {
+    "title": "Un petit-déjeuner d’exception",
+    "description": "Des produits frais, locaux et faits maison pour bien commencer la journée dans un cadre paisible.",
+    "items": ["Produits locaux", "Fruits de saison", "Viennoiseries artisanales", "Vue panoramique"]
+  },
+  "activities": {
+    "title": "Activités & Découvertes",
+    "intro": "Découvrez nos activités et les merveilles environnantes pour enrichir votre séjour.",
+    "items": [
+      {
+        "title": "Plages & criques",
+        "description": "Accès rapide aux plages de sable fin et aux criques sauvages."
+      },
+      {
+        "title": "Randonnées & balades",
+        "description": "Sentiers naturels offrant des panoramas exceptionnels."
+      },
+      {
+        "title": "Découvertes culturelles",
+        "description": "Villages traditionnels, sites historiques et artisanat local."
+      },
+      {
+        "title": "Gastronomie locale",
+        "description": "Restaurants typiques et spécialités régionales à proximité."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Prêt pour votre séjour ?",
+    "description": "Consultez nos chambres et réservez en quelques clics.",
+    "button": "Voir les chambres"
+  }
+},
+
+
+  "rooms": {
+    "title": "Nos Chambres",
+    "description": "Découvrez nos chambres soigneusement décorées, chacune portant un prénom cher à notre cœur et offrant une expérience unique.",
+    "btn": "Voir toutes les chambres",
+    "price": "À partir de {{price}} DT / nuit",
+
+    "hero": {
+      "title": "Nos Chambres",
+      "subtitle": "Cinq ambiances uniques pour un séjour d’exception"
+    },
+
+    "included": {
+      "title": "Inclus dans chaque séjour",
+      "items": ["Petit-déjeuner", "Wi-Fi gratuit", "Parking", "Linge de maison"]
+    },
+
+    "buttons": {
+      "details": "Voir les détails",
+      "reserve": "Réserver"
+    },
+
+    "detail": {
+      "back": "Retour aux chambres",
+      "people": "personnes",
+      "night": "nuit",
+      "descriptionTitle": "Description",
+      "amenitiesTitle": "Équipements & services",
+      "amenities": [
+    "Wi-Fi gratuit",
+    "Climatisation",
+    "Salle de bain privée",
+    "Télévision",
+    "Petit déjeuner inclus"
+  ]
+    }
+  },
+
+  "gallery": {
+    "title": "Un aperçu de notre maison",
+    "description": "Plongez dans l’atmosphère élégante et authentique de Dar Mamie Dida à travers une sélection d’images de nos espaces.",
+    "btn": "Voir la galerie complète",
+
+    "hero": {
+      "title": "Galerie",
+      "subtitle": "Découvrez nos chambres et espaces en images"
+    },
+
+    "video": {
+      "title": "Découvrez notre vidéo",
+      "description": "Un aperçu de nos chambres, espaces communs et expériences proposées."
+    },
+
+    "photosAlt": [
+      "Photo chambre 1",
+      "Photo chambre 2",
+      "Photo chambre 3",
+      "Photo chambre 4",
+      "Photo chambre 5",
+      "Photo chambre 6",
+      "Photo chambre 7",
+      "Photo chambre 8",
+      "Photo chambre 9",
+      "Photo chambre 10",
+      "Photo chambre 11",
+      "Photo chambre 12"
+    ]
+  },
+
+  "reservation": {
+    "title": "Réservez maintenant",
+    "description": "Réservez dès maintenant et laissez-nous vous offrir une expérience exceptionnelle. Notre équipe sera ravie de vous accueillir.",
+    "btn": "Réserver",
+
+    "modal": {
+      "title": "Réserver cette chambre",
+      "subtitle": "Remplissez le formulaire pour envoyer votre demande de réservation.",
+      "priceSuffix": "/ nuit",
+      "submit": "Confirmer la réservation",
+      "note": "Petit-déjeuner inclus • Annulation gratuite"
+    }
+  },
+
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "gallery": "Galerie",
+    "services": "Services",
+    "rooms": "Nos chambres",
+    "contact": "Contact",
+    "availability": "Verifier Disponibilités"
+  },
+
+  "footer": {
+    "description": "Une maison d’hôtes d’exception où le confort rencontre l’élégance. Votre havre de paix pour un séjour inoubliable.",
+    "otherLinks": "Autres liens",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "address": "Cité Nouira Avenue Hedi Nouira 8050 Hammamet, Tunisie",
+    "rights": "Tous droits réservés"
+  },
+
+  "about": {
+    "hero": {
+      "title": "À propos",
+      "subtitle": "Découvrez l’histoire de Dar Mamie Dida"
+    },
+    "story": {
+      "title": "Notre histoire",
+      "p1": "Dar Mamie Dida est née d’un rêve : créer un lieu où chaque voyageur se sent chez lui.",
+      "p2": "Chaque chambre porte le prénom d’un membre de la famille et raconte une histoire unique.",
+      "p3": "Notre mission est de vous offrir un séjour mémorable dans un cadre authentique."
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "subtitle": "Les principes qui guident notre hospitalité.",
+      "hospitality": {
+        "title": "Hospitalité",
+        "description": "Un accueil chaleureux et sincère."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Chaque détail compte pour votre confort."
+      },
+      "tradition": {
+        "title": "Tradition",
+        "description": "Respect des traditions avec un confort moderne."
+      },
+      "authenticity": {
+        "title": "Authenticité",
+        "description": "Une expérience humaine et sincère."
+      }
+    },
+    "reviews": {
+      "title": "Avis des clients",
+      "subtitle": "Ce que disent nos hôtes",
+      "r1": "Séjour magique !",
+      "r2": "Chambre très confortable.",
+      "r3": "Expérience unique.",
+      "r4": "Personnel attentionné.",
+      "r5": "Accueil chaleureux !",
+      "r6": "Maison magnifique."
+    },
+    "team": {
+      "title": "Une équipe dévouée",
+      "p1": "Une équipe passionnée à votre service.",
+      "p2": "Notre objectif : vous donner envie de revenir."
+    }
+  },
+
+  "contact": {
+    "hero": {
+      "title": "Contact",
+      "subtitle": "Nous sommes à votre écoute"
+    },
+    "info": {
+      "title": "Nous contacter",
+      "description": "Une question ? N’hésitez pas à nous contacter. Pour les réservations, merci de consulter la page de chaque chambre.",
+      "email": "Email",
+      "phone": "Téléphone",
+      "address": "Adresse",
+      "addressValue": "Cité Nouira, Avenue Hedi Nouira, 8050 Hammamet, Tunisie",
+      "hours": "Horaires de réception",
+      "checkin": "Arrivée : 15h00 – 20h00",
+      "checkout": "Départ : avant 11h00"
+    },
+    "form": {
+      "title": "Envoyez-nous un message",
+      "name": "Nom",
+      "email": "Email",
+      "subject": "Sujet",
+      "message": "Message",
+      "namePlaceholder": "Votre nom",
+      "emailPlaceholder": "votre@email.com",
+      "subjectPlaceholder": "Sujet du message",
+      "messagePlaceholder": "Votre message...",
+      "send": "Envoyer",
+      "sending": "Envoi en cours...",
+      "successTitle": "Message envoyé !",
+      "successDescription": "Nous vous répondrons dans les plus brefs délais."
+    }
+  },
+  "availability": {
+    "title": "Vérifier la disponibilité",
+    "checkin": "Date d'arrivée",
+    "checkout": "Date de départ",
+    "search": "Rechercher",
+    "alert": {
+      "selectBothDates": "Veuillez sélectionner les deux dates.",
+      "checkoutAfterCheckin": "La date de départ doit être après la date d’arrivée."
+    }
+  },
+  
+  "checkRooms": {
+    "title": "Vérifier les chambres disponibles",
+    "loading": "Chargement...",
+    "availableRooms": "Chambres Disponibles",
+    "noRooms": "Aucune chambre à afficher",
+    "reserve": "Réserver",
+    "currency": "TND",
+    "night": "nuit",
+    "alert": {
+      "pastDate": "Vous ne pouvez pas sélectionner une date passée.",
+      "checkoutAfterCheckin": "La date de départ doit être après la date d'arrivée.",
+      "serverError": "Erreur serveur",
+      "invalidData": "Format des données invalide."
+    }
+  }
+,
+
+  "faq": {
+    "hero": {
+      "title": "FAQ",
+      "subtitle": "Trouvez les réponses aux questions les plus fréquentes"
+    },
+    "items": [
+      {
+        "question": "Comment réserver une chambre ?",
+        "answer": "Vous pouvez réserver directement sur notre site en cliquant sur le bouton « Réserver » sur la page de chaque chambre ou nous contacter via WhatsApp."
+      },
+      {
+        "question": "Puis-je modifier ou annuler ma réservation ?",
+        "answer": "Oui, vous pouvez modifier ou annuler votre réservation gratuitement jusqu’à 48 heures avant votre arrivée."
+      },
+      {
+        "question": "Quels sont les horaires d’arrivée et de départ ?",
+        "answer": "L’arrivée se fait à partir de 15h00 et le départ doit se faire avant 11h00."
+      },
+      {
+        "question": "Le petit-déjeuner est-il inclus ?",
+        "answer": "Oui, le petit-déjeuner est inclus dans toutes nos chambres sans supplément."
+      },
+      {
+        "question": "Les animaux sont-ils acceptés ?",
+        "answer": "Malheureusement, les animaux ne sont pas autorisés pour le confort de tous."
+      },
+      {
+        "question": "Disposez-vous d’un parking ?",
+        "answer": "Oui, un parking gratuit et sécurisé est à votre disposition."
+      },
+      {
+        "question": "Le Wi-Fi est-il disponible ?",
+        "answer": "Oui, le Wi-Fi haut débit est disponible gratuitement dans toutes les chambres et les espaces communs."
+      }
+    ]
+  }
+}
