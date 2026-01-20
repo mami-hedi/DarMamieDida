@@ -14,10 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Room } from "@/data/rooms";
-import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css'; // styles par défaut
 import { PhoneField } from "@/components/PhoneField";
-
+import { useTranslation } from "react-i18next";
 
 interface ReservationModalProps {
   room: Room;
@@ -26,6 +24,7 @@ interface ReservationModalProps {
 
 export function ReservationModal({ room, children }: ReservationModalProps) {
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,56 +35,43 @@ export function ReservationModal({ room, children }: ReservationModalProps) {
     phone: "",
     message: "",
   });
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
-
   const [availability, setAvailability] = useState<string[]>([]);
-
   const [nights, setNights] = useState(0);
   const [total, setTotal] = useState(0);
 
-  // Charger les dates depuis l’URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-
     const checkin = params.get("checkin");
     const checkout = params.get("checkout");
-
     if (checkin) setCheckinDate(new Date(checkin));
     if (checkout) setCheckoutDate(new Date(checkout));
   }, []);
 
-  // Charger dates réservées
   useEffect(() => {
-  fetch(`http://localhost:3000/api/reservations/days/${room.id}`)
-    .then((res) => res.json())
-    .then((data) => setAvailability(data.reservedDays))
-    .catch(console.error);
-}, [room.id]);
+    fetch(`http://localhost:3000/api/reservations/days/${room.id}`)
+      .then((res) => res.json())
+      .then((data) => setAvailability(data.reservedDays))
+      .catch(console.error);
+  }, [room.id]);
 
-
-  // Calcul automatique du nombre de nuits
   useEffect(() => {
     if (checkinDate && checkoutDate) {
-      const diff =
-        (checkoutDate.getTime() - checkinDate.getTime()) /
-        (1000 * 60 * 60 * 24);
-
+      const diff = (checkoutDate.getTime() - checkinDate.getTime()) / (1000 * 60 * 60 * 24);
       setNights(diff > 0 ? diff : 0);
     }
   }, [checkinDate, checkoutDate]);
 
-  // Calcul du total
   useEffect(() => {
     setTotal(nights * room.price);
   }, [nights, room.price]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -96,37 +82,39 @@ today.setHours(0, 0, 0, 0);
     return `${y}-${m}-${d}`;
   };
 
-  const isDayAvailable = (date: Date) => {
-  const str = formatDateLocal(date);
-  return !availability.includes(str);
-};
+  const isDayAvailable = (date: Date) => !availability.includes(formatDateLocal(date));
 
-const dayClassName = (date: Date) => {
-  const str = formatDateLocal(date);
-  return availability.includes(str)
-    ? "bg-red-200 text-red-800 rounded-full"
-    : "bg-green-200 text-green-800 rounded-full";
-};
+  const dayClassName = (date: Date) => {
+    const str = formatDateLocal(date);
+    return availability.includes(str)
+      ? "bg-red-200 text-red-800 rounded-full"
+      : "bg-green-200 text-green-800 rounded-full";
+  };
 
+  const checkoutDayClassName = (date: Date) => {
+    if (checkinDate && date < checkinDate) return "checkout-disabled-day";
+    const str = formatDateLocal(date);
+    return availability.includes(str)
+      ? "bg-red-200 text-red-800 rounded-full"
+      : "bg-green-200 text-green-800 rounded-full";
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ Validation stricte du téléphone
-  if (!formData.phone || /^\+\d{1,4}$/.test(formData.phone)) {
-    toast({
-      title: "Numéro invalide",
-      description: "Le téléphone ne peut pas être vide ni contenir seulement l'indicatif.",
-      variant: "destructive",
-    });
-    return; // Arrête la soumission
-  }
-
+    if (!formData.phone || /^\+\d{1,4}$/.test(formData.phone)) {
+      toast({
+        title: t("reservation.modal.invalidPhoneTitle"),
+        description: t("reservation.modal.invalidPhoneDesc"),
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (!checkinDate || !checkoutDate) {
       toast({
-        title: "Erreur",
-        description: "Veuillez sélectionner une date d'arrivée et de départ.",
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.errorDates"),
         variant: "destructive",
       });
       return;
@@ -134,25 +122,23 @@ const dayClassName = (date: Date) => {
 
     if (checkoutDate <= checkinDate) {
       toast({
-        title: "Erreur",
-        description: "La date de départ doit être après la date d'arrivée.",
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.checkoutAfterCheckin"),
         variant: "destructive",
       });
       return;
     }
 
     const todayCheck = new Date();
-todayCheck.setHours(0, 0, 0, 0);
-
-if (checkinDate < todayCheck) {
-  toast({
-    title: "Date invalide",
-    description: "La date d'arrivée ne peut pas être dans le passé.",
-    variant: "destructive",
-  });
-  return;
-}
-
+    todayCheck.setHours(0, 0, 0, 0);
+    if (checkinDate < todayCheck) {
+      toast({
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.checkinPast"),
+        variant: "destructive",
+      });
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -180,8 +166,8 @@ if (checkinDate < todayCheck) {
 
       if (!res.ok) {
         toast({
-          title: "Erreur",
-          description: data.error || "Impossible d'enregistrer la réservation.",
+          title: t("reservation.modal.errorTitle"),
+          description: data.error || t("reservation.modal.errorServer"),
           variant: "destructive",
         });
         setIsSubmitting(false);
@@ -189,18 +175,18 @@ if (checkinDate < todayCheck) {
       }
 
       toast({
-        title: "Réservation enregistrée",
-        description: `Votre séjour du ${checkin} au ${checkout} (${nights} nuits) est confirmé.`,
+        title: t("reservation.modal.successTitle"),
+        description: t("reservation.modal.successDesc", { checkin, checkout, nights }),
       });
 
       setFormData({ name: "", email: "", phone: "", message: "" });
       setCheckinDate(null);
       setCheckoutDate(null);
       setOpen(false);
-    } catch (err) {
+    } catch {
       toast({
-        title: "Erreur serveur",
-        description: "Le serveur ne répond pas.",
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.errorServer"),
         variant: "destructive",
       });
     }
@@ -215,8 +201,7 @@ if (checkinDate < todayCheck) {
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl">
-            Réserver la chambre{" "}
-            <span className="text-primary">{room.name}</span>
+            {t("reservation.modal.title")} <span className="text-primary">{room.name}</span>
           </DialogTitle>
         </DialogHeader>
 
@@ -226,116 +211,104 @@ if (checkinDate < todayCheck) {
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-body text-sm text-muted-foreground">
-                  Prix par nuit
+                  {t("reservation.modal.pricePerNight")}
                 </p>
-                <p className="font-display text-2xl font-bold text-primary">
-                  {room.price}Dinars
-                </p>
+                <p className="font-display text-2xl font-bold text-primary">{room.price} Dinars</p>
               </div>
               <div className="text-right">
-                <p className="font-body text-sm text-muted-foreground">
-                  Capacité
-                </p>
-                <p className="font-body font-medium">
-                  {room.capacity} pers. • {room.size}m²
-                </p>
+                <p className="font-body text-sm text-muted-foreground">{t("reservation.modal.capacity")}</p>
+                <p className="font-body font-medium">{room.capacity} pers. • {room.size} m²</p>
               </div>
             </div>
           </div>
 
           {/* Formulaire */}
           <div>
-            <Label>Nom complet *</Label>
+            <Label>{t("reservation.modal.fullName")} *</Label>
             <Input name="name" value={formData.name} onChange={handleChange} required />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-  <div>
-    <Label>Email *</Label>
-    <Input
-      name="email"
-      type="email"
-      value={formData.email}
-      onChange={handleChange}
-      required
-    />
-  </div>
+            <div>
+              <Label>{t("reservation.modal.email")} *</Label>
+              <Input
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-  <div>
-  <Label>Téléphone *</Label>
-  <PhoneField
-  value={formData.phone}
-  onChange={(val) => setFormData({ ...formData, phone: val })}
-  onInvalid={() =>
-    toast({
-      title: "Numéro invalide",
-      description: "Le téléphone ne peut pas être vide ni contenir seulement l'indicatif.",
-      variant: "destructive",
-    })
-  }
-/>
-
-
-</div>
-
-</div>
+            <div>
+              <Label>{t("reservation.modal.phone")} *</Label>
+              <PhoneField
+                value={formData.phone}
+                onChange={(val) => setFormData({ ...formData, phone: val })}
+                onInvalid={() =>
+                  toast({
+                    title: t("reservation.modal.invalidPhoneTitle"),
+                    description: t("reservation.modal.invalidPhoneDesc"),
+                    variant: "destructive",
+                  })
+                }
+              />
+            </div>
+          </div>
 
           {/* Dates */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label>Arrivée *</Label>
+              <Label>{t("reservation.modal.checkin")} *</Label>
               <DatePicker
-  selected={checkinDate}
-  onChange={(date) => setCheckinDate(date)}
-  dateFormat="yyyy-MM-dd"
-  dayClassName={dayClassName}
-  filterDate={(date) =>
-    date >= today && isDayAvailable(date)
-  }
-  placeholderText="YYYY-MM-DD"
-  required
-/>
-
+                selected={checkinDate}
+                onChange={(date) => {
+                  setCheckinDate(date);
+                  if (date && !checkoutDate) setCheckoutDate(date);
+                }}
+                dateFormat="yyyy-MM-dd"
+                dayClassName={dayClassName}
+                filterDate={(date) => date >= today && isDayAvailable(date)}
+                placeholderText={t("reservation.modal.dateFormat")}
+                required
+              />
             </div>
 
             <div>
-              <Label>Départ *</Label>
+              <Label>{t("reservation.modal.checkout")} *</Label>
               <DatePicker
-  selected={checkoutDate}
-  onChange={(date) => setCheckoutDate(date)}
-  dateFormat="yyyy-MM-dd"
-  dayClassName={dayClassName}
-  filterDate={(date) =>
-    date >= today &&
-    isDayAvailable(date) &&
-    (checkinDate ? date > checkinDate : true)
-  }
-  placeholderText="YYYY-MM-DD"
-  required
-/>
-
+                selected={checkoutDate}
+                onChange={(date) => setCheckoutDate(date)}
+                dateFormat="yyyy-MM-dd"
+                openToDate={checkinDate || today}
+                minDate={today}
+                dayClassName={checkoutDayClassName}
+                filterDate={(date) => isDayAvailable(date) && (checkinDate ? date >= checkinDate : true)}
+                placeholderText={t("reservation.modal.dateFormat")}
+                required
+              />
             </div>
           </div>
 
-          {/* 🔥 Calcul automatique */}
+          {/* Calcul automatique */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label>Nombre de nuits</Label>
+              <Label>{t("reservation.modal.nights")}</Label>
               <Input value={nights} readOnly className="bg-gray-100 font-bold" />
             </div>
             <div>
-              <Label>Total à payer</Label>
-              <Input value={total + ' Dinars'} readOnly className="bg-gray-100 font-bold" />
+              <Label>{t("reservation.modal.total")}</Label>
+              <Input value={`${total} Dinars`} readOnly className="bg-gray-100 font-bold" />
             </div>
           </div>
 
           <div>
-            <Label>Message (optionnel)</Label>
+            <Label>{t("reservation.modal.message")}</Label>
             <Textarea name="message" value={formData.message} onChange={handleChange} />
           </div>
 
           <Button type="submit" disabled={isSubmitting} className="w-full">
-            {isSubmitting ? "Enregistrement..." : "Confirmer la réservation"}
+            {isSubmitting ? t("reservation.modal.submitting") : t("reservation.modal.confirm")}
           </Button>
         </form>
       </DialogContent>

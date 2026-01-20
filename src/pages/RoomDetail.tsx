@@ -5,10 +5,18 @@ import { Button } from "@/components/ui/button";
 import { ReservationModal } from "@/components/ReservationModal";
 import { Users, Maximize, Check, ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* =======================
    Types
 ======================= */
+interface GalleryImage {
+  id: number;
+  room_id: number;
+  url: string;
+  order: number;
+}
+
 interface Room {
   id: number;
   name: string;
@@ -18,6 +26,7 @@ interface Room {
   capacity: number;
   image?: string;
   description?: string;
+  gallery?: GalleryImage[];
 }
 
 /* =======================
@@ -31,30 +40,41 @@ const RoomDetail = () => {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState<number>(0);
+
+  const BACKEND_URL = "http://localhost:3000";
+
   useEffect(() => {
     if (!slug) return;
 
-    fetch(`http://localhost:3000/api/rooms/${slug}`)
-      .then((res) => {
+    const fetchRoom = async () => {
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/rooms/${slug}`);
         if (res.status === 404) {
           setNotFound(true);
-          return null;
+          return;
         }
-        return res.json();
-      })
-      .then((data) => {
-        if (data) setRoom(data);
-      })
-      .catch((err) => {
+        const data: Room = await res.json();
+
+        const galleryRes = await fetch(`${BACKEND_URL}/api/admin/gallery/${data.id}`);
+        const galleryData: GalleryImage[] = await galleryRes.json();
+
+        setRoom({ ...data, gallery: galleryData });
+      } catch (err) {
         console.error("❌ Room fetch error:", err);
         setNotFound(true);
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRoom();
   }, [slug]);
 
   if (!slug) return <Navigate to="/chambres" replace />;
   if (notFound) return <Navigate to="/chambres" replace />;
-  if (loading) {
+  if (loading)
     return (
       <Layout>
         <p className="text-center mt-20 text-muted-foreground">
@@ -62,22 +82,15 @@ const RoomDetail = () => {
         </p>
       </Layout>
     );
-  }
-
   if (!room) return null;
 
-  const BACKEND_URL = "http://localhost:3000";
-
-const imageUrl = room.image
-  ? `${BACKEND_URL}${room.image}`
-  : "/placeholder-room.jpg";
-
+  const imageUrl = room.image
+    ? `${BACKEND_URL}${room.image}`
+    : "/placeholder-room.jpg";
 
   return (
     <Layout>
-      {/* =======================
-         HERO
-      ======================= */}
+      {/* HERO */}
       <section className="relative h-[60vh] min-h-[500px] flex items-end">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -117,9 +130,7 @@ const imageUrl = room.image
         </div>
       </section>
 
-      {/* =======================
-         CONTENT
-      ======================= */}
+      {/* CONTENT */}
       <section className="section-padding">
         <div className="container-custom grid lg:grid-cols-3 gap-12">
           {/* Description */}
@@ -128,11 +139,8 @@ const imageUrl = room.image
               {t("rooms.detail.descriptionTitle")}
             </h2>
 
-            <p className="text-muted-foreground mb-8">
-              {room.description}
-            </p>
+            <p className="text-muted-foreground mb-8">{room.description}</p>
 
-            {/* Amenities (statique pour l’instant) */}
             <h3 className="text-2xl font-semibold mb-4">
               {t("rooms.detail.amenitiesTitle")}
             </h3>
@@ -154,7 +162,6 @@ const imageUrl = room.image
             <h3 className="text-2xl font-semibold mb-2">
               {t("reservation.modal.title")}
             </h3>
-
             <p className="text-sm text-muted-foreground mb-6">
               {t("reservation.modal.subtitle")}
             </p>
@@ -178,6 +185,92 @@ const imageUrl = room.image
           </div>
         </div>
       </section>
+
+      {/* GALERIE */}
+      {room.gallery && room.gallery.length > 0 && (
+        <section className="section-padding pt-0">
+          <div className="container-custom">
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  {room.gallery.map((img, idx) => (
+    <div
+      key={idx}
+      className="overflow-hidden rounded-xl cursor-pointer"
+      onClick={() => {
+        setCurrentImage(idx);
+        setLightboxOpen(true);
+      }}
+    >
+      <img
+        src={`${BACKEND_URL}${img.url}`}
+        alt={`Galerie ${idx + 1}`}
+        className="w-full h-48 object-cover"
+      />
+    </div>
+  ))}
+</div>
+
+          </div>
+        </section>
+      )}
+
+      {/* LIGHTBOX */}
+      <AnimatePresence>
+        {lightboxOpen && room.gallery && (
+          <motion.div
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightboxOpen(false)}
+          >
+            <button
+              className="absolute top-4 right-4 text-white text-2xl z-50"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxOpen(false);
+              }}
+            >
+              ✕
+            </button>
+
+            <motion.img
+              key={currentImage}
+              src={`${BACKEND_URL}${room.gallery[currentImage].url}`}
+              alt={`Galerie ${currentImage + 1}`}
+              className="max-h-[90vh] max-w-[90vw] object-contain shadow-lg rounded-lg"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            {currentImage > 0 && (
+              <button
+                className="absolute left-4 text-white text-3xl z-50"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImage(currentImage - 1);
+                }}
+              >
+                ‹
+              </button>
+            )}
+            {currentImage < room.gallery.length - 1 && (
+              <button
+                className="absolute right-4 text-white text-3xl z-50"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImage(currentImage + 1);
+                }}
+              >
+                ›
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 };

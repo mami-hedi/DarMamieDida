@@ -13,6 +13,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useRef } from "react";
 import { AdminNotifications } from "@/components/AdminNotifications";
+import { PhoneField } from "@/components/PhoneField";
+
 
 
 
@@ -735,22 +737,24 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
             <div>
   <Label>Téléphone</Label>
 
-  <PhoneInput
-    country="fr"
+  <PhoneField
     value={formData.phone}
-    onChange={(phone) =>
+    onChange={(val) =>
       setFormData((prev) => ({
         ...prev,
-        phone,
+        phone: val,
       }))
     }
-    enableSearch
-    countryCodeEditable={false}
-    containerClass="!w-full"
-    inputClass="!w-full !h-10 !pl-14 !rounded-md"
-    buttonClass="!pl-3"
+    onInvalid={() =>
+      toast({
+        title: "Numéro invalide",
+        description: "Veuillez saisir un numéro de téléphone valide.",
+        variant: "destructive",
+      })
+    }
   />
 </div>
+
 
             <div>
               <Label>Arrivée *</Label>

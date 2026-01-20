@@ -9,7 +9,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const [rooms] = await db.query<RowDataPacket[]>(
-      "SELECT id, name, description, slug, price, size, capacity, image, created_at FROM rooms ORDER BY id ASC"
+      "SELECT id, name, description, slug, price, size, capacity, image, is_active, created_at FROM rooms ORDER BY id ASC"
     );
     res.json(rooms);
   } catch (err) {
@@ -37,7 +37,7 @@ router.get("/:id", async (req, res) => {
 
 // 🔹 POST - Créer une chambre (UPLOAD IMAGE)
 router.post("/", upload.single("image"), async (req, res) => {
-  const { name, description, slug, price, size, capacity } = req.body;
+  const { name, description, slug, price, size, capacity, is_active } = req.body;
 
   if (!name || !slug || !price) {
     return res.status(400).json({ error: "Nom, slug et prix sont obligatoires" });
@@ -47,8 +47,8 @@ router.post("/", upload.single("image"), async (req, res) => {
 
   try {
     const [result] = await db.query<ResultSetHeader>(
-      `INSERT INTO rooms (name, description, slug, price, size, capacity, image)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO rooms (name, description, slug, price, size, capacity, image, is_active)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
         description || "",
@@ -57,6 +57,7 @@ router.post("/", upload.single("image"), async (req, res) => {
         size || 0,
         capacity || 1,
         image,
+        is_active ?? 1, // 👈 actif par défaut
       ]
     );
 
@@ -77,7 +78,7 @@ router.post("/", upload.single("image"), async (req, res) => {
 
 // 🔹 PUT - Modifier une chambre (IMAGE OPTIONNELLE)
 router.put("/:id", upload.single("image"), async (req, res) => {
-  const { name, description, slug, price, size, capacity } = req.body;
+  const { name, description, slug, price, size, capacity, is_active } = req.body;
 
   if (!name || !slug || !price) {
     return res.status(400).json({ error: "Nom, slug et prix sont obligatoires" });
@@ -88,7 +89,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     let sql = `
       UPDATE rooms
-      SET name = ?, description = ?, slug = ?, price = ?, size = ?, capacity = ?
+      SET name = ?, description = ?, slug = ?, price = ?, size = ?, capacity = ?, is_active = ?
     `;
     const params: any[] = [
       name,
@@ -97,6 +98,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       price,
       size || 0,
       capacity || 1,
+      is_active,
     ];
 
     if (image) {
@@ -132,7 +134,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const [result] = await db.query<ResultSetHeader>(
-      "DELETE FROM rooms WHERE id = ?",
+      "UPDATE rooms SET is_active = 0 WHERE id = ?",
       [req.params.id]
     );
 

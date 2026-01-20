@@ -7,6 +7,7 @@ import adminReservationRoutes from "./routes/adminReservationRoutes";
 import roomsRoutes from "./routes/roomsRoutes";
 import chatRoutes from "./routes/chatRoutes";
 import adminRoomsRouter from "./routes/adminRoomsRoutes";
+import adminGalleryRouter from "./routes/adminGalleryRoutes";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -70,6 +71,8 @@ app.use("/uploads", express.static("public/uploads"));
 
 
 app.use("/api/admin/rooms", adminRoomsRouter);
+
+app.use("/api/admin/gallery", adminGalleryRouter); // ← route pour gérer galerie
 
 // Routes Front-end client
 app.use("/api/reservations", reservationRoutes);

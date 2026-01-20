@@ -163,16 +163,35 @@
   },
 
   "reservation": {
-    "title": "Réservez maintenant",
-    "description": "Réservez dès maintenant et laissez-nous vous offrir une expérience exceptionnelle. Notre équipe sera ravie de vous accueillir.",
-    "btn": "Réserver",
-
     "modal": {
-      "title": "Réserver cette chambre",
-      "subtitle": "Remplissez le formulaire pour envoyer votre demande de réservation.",
+      "title": "Réserver la chambre",
+      "subtitle": "Remplissez le formulaire ci-dessous pour réserver votre séjour",
+      "pricePerNight": "Prix par nuit",
+      "capacity": "Capacité",
+      "fullName": "Nom complet",
+      "email": "Email",
+      "phone": "Téléphone",
+      "checkin": "Arrivée",
+      "checkout": "Départ",
+      "dateFormat": "YYYY-MM-DD",
+      "nights": "Nombre de nuits",
+      "total": "Total à payer",
+      "message": "Message (optionnel)",
+      "submitting": "Enregistrement...",
+      "confirm": "Confirmer la réservation",
+      "subtitle": "Veuillez remplir le formulaire pour réserver",
       "priceSuffix": "/ nuit",
-      "submit": "Confirmer la réservation",
-      "note": "Petit-déjeuner inclus • Annulation gratuite"
+      "submit": "Réserver maintenant",
+      "note": "Vous recevrez une confirmation après la réservation.",
+      "invalidPhoneTitle": "Numéro invalide",
+      "invalidPhoneDesc": "Le téléphone ne peut pas être vide ni contenir seulement l'indicatif.",
+      "errorTitle": "Erreur",
+      "errorDates": "Veuillez sélectionner une date d'arrivée et de départ.",
+      "checkoutAfterCheckin": "La date de départ doit être après la date d'arrivée.",
+      "checkinPast": "La date d'arrivée ne peut pas être dans le passé.",
+      "errorServer": "Le serveur ne répond pas.",
+      "successTitle": "Réservation enregistrée",
+      "successDesc": "Votre séjour du {{checkin}} au {{checkout}} ({{nights}} nuits) est confirmé."
     }
   },
 

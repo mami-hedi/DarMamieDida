@@ -161,16 +161,35 @@
   },
 
   "reservation": {
-    "title": "Book now",
-    "description": "Book now and let us offer you an exceptional experience. Our team will be delighted to welcome you and make your stay unforgettable.",
-    "btn": "Book now",
-
     "modal": {
       "title": "Book this room",
-      "subtitle": "Fill in the form to submit your booking request.",
+      "subtitle": "Fill out the form below to reserve your stay",
+      "pricePerNight": "Price per night",
+      "capacity": "Capacity",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "checkin": "Check-in",
+      "checkout": "Check-out",
+      "dateFormat": "YYYY-MM-DD",
+      "nights": "Number of nights",
+      "total": "Total",
+      "message": "Message (optional)",
+      "submitting": "Submitting...",
+      "confirm": "Confirm reservation",
+      "subtitle": "Please fill the form to book",
       "priceSuffix": "/ night",
-      "submit": "Book now",
-      "note": "Breakfast included • Free cancellation"
+      "submit": "Book Now",
+      "note": "You will receive a confirmation after booking.",
+      "invalidPhoneTitle": "Invalid number",
+      "invalidPhoneDesc": "Phone cannot be empty or contain only the country code.",
+      "errorTitle": "Error",
+      "errorDates": "Please select check-in and check-out dates.",
+      "checkoutAfterCheckin": "Check-out date must be after check-in date.",
+      "checkinPast": "Check-in date cannot be in the past.",
+      "errorServer": "Server not responding.",
+      "successTitle": "Booking Confirmed",
+      "successDesc": "Your stay from {{checkin}} to {{checkout}} ({{nights}} nights) is confirmed."
     }
   },
 

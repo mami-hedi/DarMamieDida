@@ -18,17 +18,18 @@ router.get("/available", async (req, res) => {
 
     const sql = `
       SELECT *
-      FROM rooms
-      WHERE id NOT IN (
-        SELECT room_id
-        FROM reservations
-        WHERE status IN ('confirmed', 'pending')
-          AND NOT (
-            DATE(checkout) <= ?
-            OR DATE(checkin) >= ?
-          )
+FROM rooms
+WHERE is_active = 1
+  AND id NOT IN (
+    SELECT room_id
+    FROM reservations
+    WHERE status IN ('confirmed', 'pending')
+      AND NOT (
+        DATE(checkout) <= ?
+        OR DATE(checkin) >= ?
       )
-      ORDER BY name ASC
+  )
+ORDER BY name ASC
     `;
 
     const [rooms] = await db.query(sql, [checkinDate, checkoutDate]);
@@ -48,7 +49,7 @@ router.get("/available", async (req, res) => {
 router.get("/:slug", async (req, res) => {
   try {
     const [rows] = await db.query(
-      "SELECT * FROM rooms WHERE slug = ? LIMIT 1",
+      "SELECT * FROM rooms WHERE slug = ? AND is_active = 1 LIMIT 1",
       [req.params.slug]
     );
 
@@ -67,7 +68,7 @@ router.get("/:slug", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const [rooms] = await db.query(
-      "SELECT id, name, slug, price, size, capacity, image, description FROM rooms ORDER BY name ASC"
+      "SELECT id, name, slug, price, size, capacity, image, description FROM rooms WHERE is_active = 1 ORDER BY name ASC"
     );
     res.json(rooms);
   } catch (err) {

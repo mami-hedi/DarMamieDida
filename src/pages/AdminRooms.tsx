@@ -21,7 +21,13 @@ interface Room {
   size: number;
   capacity: number;
   image?: string;
+  is_active: number; 
   created_at?: string;
+}
+
+interface GalleryImage {
+  id: number;
+  url: string;
 }
 
 export function AdminRooms() {
@@ -39,8 +45,15 @@ export function AdminRooms() {
   const [slugInput, setSlugInput] = useState("");
   const [priceInput, setPriceInput] = useState(0);
   const [sizeInput, setSizeInput] = useState(0);
+  const [isActiveInput, setIsActiveInput] = useState(true);
+
+
   const [capacityInput, setCapacityInput] = useState(1);
   const [imageInput, setImageInput] = useState<File | null>(null);
+
+  // 🔹 Galerie
+  const [gallery, setGallery] = useState<GalleryImage[]>([]);
+  const [newGalleryFiles, setNewGalleryFiles] = useState<FileList | null>(null);
 
   // 🔹 Fetch rooms
   const fetchRooms = async () => {
@@ -64,6 +77,19 @@ export function AdminRooms() {
     fetchRooms();
   }, []);
 
+  // 🔹 Fetch galerie
+  const fetchGallery = async (roomId: number) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/admin/gallery/${roomId}`);
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setGallery(data);
+    } catch (err) {
+      console.error(err);
+      setGallery([]);
+    }
+  };
+
   // 🔹 Open form
   const openForm = (room?: Room) => {
     if (room) {
@@ -74,7 +100,9 @@ export function AdminRooms() {
       setPriceInput(room.price);
       setSizeInput(room.size);
       setCapacityInput(room.capacity);
+      setIsActiveInput(room.is_active === 1);
       setImageInput(null); // ⚠️ jamais pré-remplir input file
+      fetchGallery(room.id);
     } else {
       setEditingRoom(null);
       setNameInput("");
@@ -83,61 +111,65 @@ export function AdminRooms() {
       setPriceInput(0);
       setSizeInput(0);
       setCapacityInput(1);
+      setIsActiveInput(true); // 👈 actif par défaut
       setImageInput(null);
+      setGallery([]);
     }
     setFormOpen(true);
   };
 
   // 🔹 Save room (CREATE / UPDATE)
   const handleSaveRoom = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const url = editingRoom
-        ? `http://localhost:3000/api/admin/rooms/${editingRoom.id}`
-        : "http://localhost:3000/api/admin/rooms";
+  try {
+    const url = editingRoom
+      ? `http://localhost:3000/api/admin/rooms/${editingRoom.id}`
+      : "http://localhost:3000/api/admin/rooms";
 
-      const method = editingRoom ? "PUT" : "POST";
+    const method = editingRoom ? "PUT" : "POST";
 
-      const formData = new FormData();
-      formData.append("name", nameInput);
-      formData.append("description", descriptionInput);
-      formData.append("slug", slugInput);
-      formData.append("price", String(priceInput));
-      formData.append("size", String(sizeInput));
-      formData.append("capacity", String(capacityInput));
+    const formData = new FormData();
+    formData.append("name", nameInput);
+    formData.append("description", descriptionInput);
+    formData.append("slug", slugInput);
+    formData.append("price", String(priceInput));
+    formData.append("size", String(sizeInput));
+    formData.append("capacity", String(capacityInput));
+    formData.append("is_active", isActiveInput ? "1" : "0"); // ✅ ICI
 
-      if (imageInput) {
-        formData.append("image", imageInput);
-      }
-
-      const res = await fetch(url, {
-        method,
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "Erreur serveur");
-      }
-
-      toast({
-        title: "Succès",
-        description: editingRoom
-          ? "Chambre modifiée"
-          : "Chambre ajoutée",
-      });
-
-      setFormOpen(false);
-      fetchRooms();
-    } catch (error: any) {
-      toast({
-        title: "Erreur",
-        description: error.message,
-        variant: "destructive",
-      });
+    if (imageInput) {
+      formData.append("image", imageInput);
     }
-  };
+
+    const res = await fetch(url, {
+      method,
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || "Erreur serveur");
+    }
+
+    toast({
+      title: "Succès",
+      description: editingRoom
+        ? "Chambre modifiée"
+        : "Chambre ajoutée",
+    });
+
+    setFormOpen(false);
+    fetchRooms();
+  } catch (error: any) {
+    toast({
+      title: "Erreur",
+      description: error.message,
+      variant: "destructive",
+    });
+  }
+};
+
 
   // 🔹 Delete room
   const handleDeleteRoom = async (id: number) => {
@@ -160,6 +192,40 @@ export function AdminRooms() {
     }
   };
 
+
+
+
+  // 🔹 Upload nouvelles images de galerie
+  const handleUploadGallery = async () => {
+    if (!editingRoom || !newGalleryFiles) return;
+    const formData = new FormData();
+    Array.from(newGalleryFiles).forEach((f) => formData.append("images", f));
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/admin/gallery/${editingRoom.id}`,
+        { method: "POST", body: formData }
+      );
+      if (!res.ok) throw new Error();
+      fetchGallery(editingRoom.id);
+      setNewGalleryFiles(null);
+      toast({ title: "Succès", description: "Galerie mise à jour" });
+    } catch (err: any) {
+      toast({ title: "Erreur", description: err.message, variant: "destructive" });
+    }
+  };
+ 
+
+  // 🔹 Supprimer image galerie
+  const handleDeleteGallery = async (id: number) => {
+    try {
+      await fetch(`http://localhost:3000/api/admin/gallery/${id}`, { method: "DELETE" });
+      if (editingRoom) fetchGallery(editingRoom.id);
+      toast({ title: "Succès", description: "Image supprimée" });
+    } catch {
+      toast({ title: "Erreur", description: "Suppression impossible", variant: "destructive" });
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar active="rooms" />
@@ -170,9 +236,7 @@ export function AdminRooms() {
         </h1>
 
         <div className="flex justify-end mb-4">
-          <Button onClick={() => openForm()}>
-            + Ajouter une chambre
-          </Button>
+          <Button onClick={() => openForm()}>+ Ajouter une chambre</Button>
         </div>
 
         {loading ? (
@@ -187,6 +251,8 @@ export function AdminRooms() {
                   <th className="px-4 py-3">Slug</th>
                   <th className="px-4 py-3">Prix</th>
                   <th className="px-4 py-3">Capacité</th>
+                  <th className="px-4 py-3">Surface (m²)</th>
+                  <th className="px-4 py-3">État</th>
                   <th className="px-4 py-3">Actions</th>
                 </tr>
               </thead>
@@ -208,6 +274,19 @@ export function AdminRooms() {
                     <td className="px-4 py-3">{room.slug}</td>
                     <td className="px-4 py-3">{room.price} DT</td>
                     <td className="px-4 py-3">{room.capacity}</td>
+                    <td className="px-4 py-3">{room.size} m²</td>
+                    <td className="px-4 py-3">
+  {room.is_active === 1 ? (
+    <span className="px-2 py-1 text-xs rounded bg-green-100 text-green-700">
+      Active
+    </span>
+  ) : (
+    <span className="px-2 py-1 text-xs rounded bg-red-100 text-red-700">
+      Désactivée
+    </span>
+  )}
+</td>
+
                     <td className="px-4 py-3 flex gap-2">
                       <Button
                         size="sm"
@@ -233,9 +312,7 @@ export function AdminRooms() {
 
         {/* 🔹 FORM */}
         <Dialog open={formOpen} onOpenChange={setFormOpen}>
-         <DialogContent className="sm:max-w-xl max-h-[80vh] overflow-y-auto">
-
-
+          <DialogContent className="sm:max-w-xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingRoom ? "Modifier la chambre" : "Ajouter une chambre"}
@@ -243,26 +320,24 @@ export function AdminRooms() {
             </DialogHeader>
 
             <form onSubmit={handleSaveRoom} className="space-y-4">
-               <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                <Label>Nom *</Label>
-                <Input
-                  value={nameInput}
-                  onChange={(e) => setNameInput(e.target.value)}
-                  required
-                />
-              </div>
+                  <Label>Nom *</Label>
+                  <Input
+                    value={nameInput}
+                    onChange={(e) => setNameInput(e.target.value)}
+                    required
+                  />
+                </div>
                 <div>
-                
-                <Label>Slug *</Label>
-                <Input
-                  value={slugInput}
-                  onChange={(e) => setSlugInput(e.target.value)}
-                  required
-                />
+                  <Label>Slug *</Label>
+                  <Input
+                    value={slugInput}
+                    onChange={(e) => setSlugInput(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
-              </div>
-              
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -282,6 +357,15 @@ export function AdminRooms() {
                   />
                 </div>
               </div>
+              <div>
+    <Label>Surface (m²) *</Label>
+    <Input
+      type="number"
+      value={sizeInput}
+      onChange={(e) => setSizeInput(+e.target.value)}
+      required
+    />
+  </div>
 
               {/* 🔹 Image actuelle */}
               {editingRoom?.image && (
@@ -301,9 +385,7 @@ export function AdminRooms() {
                   type="file"
                   accept="image/*"
                   onChange={(e) => {
-                    if (e.target.files?.[0]) {
-                      setImageInput(e.target.files[0]);
-                    }
+                    if (e.target.files?.[0]) setImageInput(e.target.files[0]);
                   }}
                 />
               </div>
@@ -315,6 +397,57 @@ export function AdminRooms() {
                   onChange={(e) => setDescriptionInput(e.target.value)}
                 />
               </div>
+
+              {/* 🔹 Galerie */}
+              <div className="mt-4">
+                <Label>Galerie</Label>
+                <div className="grid grid-cols-3 gap-2 mt-2">
+                  {gallery.map((img) => (
+                    <div key={img.id} className="relative">
+                      <img
+                        src={`http://localhost:3000${img.url}`}
+                        className="w-full h-24 object-cover rounded"
+                      />
+                      <button
+                        type="button"
+                        className="absolute top-1 right-1 bg-red-500 text-white px-1 rounded"
+                        onClick={() => handleDeleteGallery(img.id)}
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <Input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="mt-2"
+                  onChange={(e) => setNewGalleryFiles(e.target.files)}
+                />
+
+                <Button onClick={handleUploadGallery} className="mt-2">
+                  Ajouter à la galerie
+                </Button>
+              </div>
+
+              <div className="flex items-center gap-3">
+  <Label>État de la chambre</Label>
+
+  <label className="flex items-center gap-2 cursor-pointer">
+    <input
+      type="checkbox"
+      checked={isActiveInput}
+      onChange={(e) => setIsActiveInput(e.target.checked)}
+      className="accent-green-600"
+    />
+    <span className={isActiveInput ? "text-green-600" : "text-red-600"}>
+      {isActiveInput ? "Activée" : "Désactivée"}
+    </span>
+  </label>
+</div>
+
 
               <div className="flex gap-3 pt-4">
                 <Button

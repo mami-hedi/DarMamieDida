@@ -52,3 +52,10 @@
   color: #b91c1c;            /* rouge foncé pour le texte */
 }
 
+.react-datepicker__day--disabled,
+.checkout-disabled-day {
+  background-color: #e5e7eb !important; /* gris clair */
+  color: #9ca3af !important;           /* texte gris */
+  border-radius: 50%;
+  cursor: not-allowed;
+}
