@@ -1,4 +1,7 @@
 import { Router } from "express";
+import { Request } from 'express';
+// Si l'erreur persiste sur .file, tu peux "tricher" temporairement en castant l'objet :
+// const file = (req as any).file;
 import { db } from "../db";
 import { RowDataPacket, ResultSetHeader } from "mysql2";
 import { upload } from "../middlewares/upload";

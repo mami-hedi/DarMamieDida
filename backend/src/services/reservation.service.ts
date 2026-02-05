@@ -8,8 +8,18 @@ export const getReservations = async () => {
 };
 
 // Créer une réservation
-export const createReservation = async (reservation: Reservation) => {
-  const { room_id, name, email, phone, checkin, checkout, message } = reservation;
+export const createReservation = async (reservation: any) => {
+  const { 
+    room_id, 
+    name, 
+    email, 
+    phone, 
+    checkin, 
+    checkout, 
+    message, 
+    nights, 
+    total 
+  } = reservation;
 
   // Vérifier que la date de départ est après la date d'arrivée
   if (new Date(checkout) <= new Date(checkin)) {
@@ -40,12 +50,25 @@ export const createReservation = async (reservation: Reservation) => {
     throw new Error("La chambre est déjà réservée pour ces dates.");
   }
 
-  // Insérer la réservation
+  /// ✅ CORRECTION SYNTAXE SQL
   const [result]: any = await db.query(
     `INSERT INTO reservations 
-     (room_id, name, email, phone, checkin, checkout, message, status)
-     VALUES (?, ?, ?, ?, ?, ?, ?, "pending")`,
-    [room_id, name, email, phone || null, checkin, checkout, message || null]
+     (room_id, name, email, phone, checkin, checkout, message, status, payment_status, advance_amount, nights, total) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, // Exactement 12 points d'interrogation
+    [
+      room_id,                // 1
+      name,                   // 2
+      email,                  // 3
+      phone || null,          // 4
+      checkin,                // 5
+      checkout,               // 6
+      message || null,        // 7
+      'pending',              // 8 (status)
+      'unpaid',               // 9 (payment_status)
+      0,                      // 10 (advance_amount)
+      Number(nights) || 0,    // 11
+      Number(total) || 0      // 12
+    ]
   );
 
   return result.insertId;
