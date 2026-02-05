@@ -35,7 +35,7 @@ const Rooms = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/rooms")
+    fetch(`${BACKEND_URL}/api/rooms`)
       .then((res) => {
         if (!res.ok) throw new Error("Erreur chargement chambres");
         return res.json();
