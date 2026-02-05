@@ -9,14 +9,12 @@ export const db = mysql.createPool({
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME || "DarMamieDida",
-  port: process.env.DB_PORT || 3306,
+  port: Number(process.env.DB_PORT) || 14535,
   
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
   
-  // Crucial pour Aiven : configuration SSL
-  ssl: {
-    rejectUnauthorized: false // Permet la connexion sécurisée sans certificat CA local
-  }
+  // SSL obligatoire pour se connecter à Aiven depuis Render
+  ssl: process.env.DB_HOST ? { rejectUnauthorized: false } : null
 });
