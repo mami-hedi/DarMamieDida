@@ -15,7 +15,9 @@ export function AdminAvailability() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
+  
   const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
 
@@ -51,9 +53,10 @@ export function AdminAvailability() {
     }
 
     try {
-      const res = await fetch(
-        `http://localhost:3000/api/rooms/available?checkin=${checkin}&checkout=${checkout}`
-      );
+    // ✅ Remplacement du lien localhost par BACKEND_URL
+    const res = await fetch(
+      `${BACKEND_URL}/api/rooms/available?checkin=${checkin}&checkout=${checkout}`
+    );
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);

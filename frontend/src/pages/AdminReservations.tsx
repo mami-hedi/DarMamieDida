@@ -11,7 +11,7 @@ import { Sidebar } from "@/components/Sidebar";
 import { AdminNotifications } from "@/components/AdminNotifications";
 import { PhoneField } from "@/components/PhoneField";
 
-const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com/";
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
 
 interface Reservation {
   id: number;
