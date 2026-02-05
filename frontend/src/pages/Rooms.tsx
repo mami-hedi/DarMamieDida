@@ -21,7 +21,9 @@ interface Room {
   image?: string;
   description?: string;
 }
-const BACKEND_URL = "http://localhost:3000";
+
+// 1. On utilise la variable d'environnement ou l'URL de Render par défaut
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
 
 /* =======================
    Component

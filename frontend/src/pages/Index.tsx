@@ -22,6 +22,8 @@ interface Room {
   image?: string;
 }
 
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darb-b.onrender.com";
+
 const Index = () => {
   const { t } = useTranslation();
   const [rooms, setRooms] = useState<Room[]>([]);
@@ -31,7 +33,7 @@ const Index = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/rooms");
+        const res = await fetch(`${BACKEND_URL}/api/rooms`);
         if (!res.ok) throw new Error("Impossible de récupérer les chambres");
         const data: Room[] = await res.json();
         setRooms(data.slice(0, 3)); // seulement les 3 premières
@@ -184,9 +186,13 @@ const Index = () => {
                 >
                   <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
                     <img
-                      src={room.image ? `http://localhost:3000${room.image}` : "/placeholder-room.jpg"}
+                      src={
+                        room.image
+                          ? `${BACKEND_URL}${room.image}`
+                          : "/placeholder-room.jpg"
+                      }
                       alt={room.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover group-hover:scale-105 transition"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">

@@ -43,7 +43,7 @@ const RoomDetail = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState<number>(0);
 
-  const BACKEND_URL = "http://localhost:3000";
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
 
   useEffect(() => {
     if (!slug) return;
