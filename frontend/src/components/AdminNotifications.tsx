@@ -3,6 +3,9 @@ import { io } from "socket.io-client";
 import { FaBell } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
+
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
+
 interface Notification {
   id: number;
   type: string;
@@ -16,8 +19,13 @@ export function AdminNotifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [open, setOpen] = useState(false);
 
+
+
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    // ✅ On utilise BACKEND_URL au lieu de localhost
+    const socket = io(BACKEND_URL, {
+      transports: ["websocket"], // Recommandé pour éviter les erreurs de polling CORS
+    });
 
     // 🔔 Écoute l'événement unique admin-notification
     socket.on("admin-notification", (data: Notification) => {
