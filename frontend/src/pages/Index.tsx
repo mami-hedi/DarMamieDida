@@ -22,7 +22,7 @@ interface Room {
   image?: string;
 }
 
-const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darb-b.onrender.com";
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
 
 const Index = () => {
   const { t } = useTranslation();
