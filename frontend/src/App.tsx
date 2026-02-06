@@ -18,7 +18,7 @@ import NotFound from "./pages/NotFound";
 import { AdminReservations } from "./pages/AdminReservations";
 import { AdminClients } from "./pages/AdminClients";
 import { AdminAvailability } from "./pages/AdminAvailability";
-import { AdminTarifs } from "./pages/AdminTarifs";
+import { AdminDashboard } from "@/pages/AdminDashboard";
 import { AdminLogin } from "./pages/AdminLogin";
 import { AdminRooms } from "@/pages/AdminRooms";
 
@@ -61,47 +61,48 @@ const App = () => (
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Admin routes protégées */}
-          <Route 
-            path="/admin/reservations" 
+          <Route
+            path="/admin/reservations"
             element={
               <ProtectedAdminRoute>
                 <AdminReservations />
               </ProtectedAdminRoute>
-            } 
+            }
           />
-          <Route 
-            path="/admin/clients" 
+          <Route
+            path="/admin/clients"
             element={
               <ProtectedAdminRoute>
                 <AdminClients />
               </ProtectedAdminRoute>
-            } 
+            }
           />
-          <Route 
-            path="/admin/availability" 
+          <Route
+            path="/admin/availability"
             element={
               <ProtectedAdminRoute>
                 <AdminAvailability />
               </ProtectedAdminRoute>
-            } 
+            }
           />
-           <Route 
-  path="/admin/tarifs" 
-  element={
-    <ProtectedAdminRoute>
-      <AdminTarifs />
-    </ProtectedAdminRoute>
-  } 
-/>
 
-     <Route 
-  path="/admin/rooms" 
-  element={
-    <ProtectedAdminRoute>
-      <AdminRooms  />
-    </ProtectedAdminRoute>
-  } 
-/>
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedAdminRoute>
+                <AdminDashboard />
+              </ProtectedAdminRoute>
+            }
+          />
+
+          <Route
+            path="/admin/rooms"
+            element={
+              <ProtectedAdminRoute>
+                <AdminRooms />
+              </ProtectedAdminRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

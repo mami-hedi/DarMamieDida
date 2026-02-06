@@ -22,13 +22,17 @@ export function AdminClients() {
   const [clients, setClients] = useState<Client[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // ✅ Déclaration de l'URL dynamique
+  const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
+
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const clientsPerPage = 10;
 
   const fetchClients = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/admin/reservations");
+      // ✅ Utilisation des backticks et de BACKEND_URL
+      const res = await fetch(`${BACKEND_URL}/api/admin/reservations`);
       const data: Reservation[] = await res.json();
 
       const uniqueClientsMap = new Map<string, Client>();

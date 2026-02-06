@@ -1,4 +1,3 @@
-// src/components/Sidebar.tsx
 import { useState } from "react";
 import { FaTachometerAlt, FaUser, FaCalendarAlt, FaSignOutAlt, FaMoneyBillWave } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -33,72 +32,77 @@ export function Sidebar({ active }: SidebarProps) {
         `}
       >
         <div className="p-6 text-2xl font-bold border-b flex justify-between items-center">
-  <div className="leading-tight">
-    <span className="text-blue-700">Espace Admin</span>
-    <br />
-    <span className="text-black">Dar Mamie </span>
-    <span className="text-red-600">Dida</span>
-  </div>
+          <div className="leading-tight">
+            <span className="text-blue-700">Espace Admin</span>
+            <br />
+            <span className="text-black">Dar </span>
+            <span className="text-red-600"><b>Mamie Dida </b></span>
+          </div>
 
-  <button
-    className="md:hidden text-xl"
-    onClick={() => setSidebarOpen(false)}
-  >
-    ✕
-  </button>
-</div>
+          <button
+            className="md:hidden text-xl"
+            onClick={() => setSidebarOpen(false)}
+          >
+            ✕
+          </button>
+        </div>
 
 
         <nav className="flex-1 p-4 space-y-2">
           <button
-            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${
-              active === "reservations" ? "bg-blue-100 font-semibold" : ""
-            }`}
+            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${active === "reservations" ? "bg-blue-100 font-semibold" : ""
+              }`}
             onClick={() => navigate("/admin/reservations")}
           >
             <FaTachometerAlt /> Réservations
           </button>
 
           <button
-  className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${
-    active === "rooms" ? "bg-blue-100 font-semibold" : ""
-  }`}
-  onClick={() => navigate("/admin/rooms")}
->
-  <FaMoneyBillWave /> Gestion Chambres
-</button>
+            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${active === "rooms" ? "bg-blue-100 font-semibold" : ""
+              }`}
+            onClick={() => navigate("/admin/rooms")}
+          >
+            <FaMoneyBillWave /> Gestion Chambres
+          </button>
 
           <button
-            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${
-              active === "clients" ? "bg-blue-100 font-semibold" : ""
-            }`}
+            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${active === "clients" ? "bg-blue-100 font-semibold" : ""
+              }`}
             onClick={() => navigate("/admin/clients")}
           >
             <FaUser /> Clients
           </button>
 
           <button
-            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${
-              active === "disponibilite" ? "bg-blue-100 font-semibold" : ""
-            }`}
+            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${active === "disponibilite" ? "bg-blue-100 font-semibold" : ""
+              }`}
             onClick={() => navigate("/admin/availability")}
           >
             <FaCalendarAlt /> Disponibilité
           </button>
 
-          
+          <button
+            className={`w-full flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-100 transition ${active === "dashboard" ? "bg-blue-100 font-semibold" : ""
+              }`}
+            onClick={() => navigate("/admin/dashboard")}
+          >
+            <FaTachometerAlt /> Dashboard
+          </button>
+
+
+
 
         </nav>
 
         <button
-  className="w-full flex items-center gap-3 px-4 py-2 rounded m-4 mt-auto text-red-600 hover:bg-red-100 transition"
-  onClick={() => {
-    localStorage.removeItem("admin_logged_in");
-    navigate("/admin/login");
-  }}
->
-  <FaSignOutAlt /> Déconnexion
-</button>
+          className="w-full flex items-center gap-3 px-4 py-2 rounded m-4 mt-auto text-red-600 hover:bg-red-100 transition"
+          onClick={() => {
+            localStorage.removeItem("admin_logged_in");
+            navigate("/admin/login");
+          }}
+        >
+          <FaSignOutAlt /> Déconnexion
+        </button>
 
       </aside>
 
@@ -107,7 +111,7 @@ export function Sidebar({ active }: SidebarProps) {
         <button onClick={() => setSidebarOpen(true)} className="text-2xl">
           ☰
         </button>
-        <span className="font-bold text-blue-700">Espace Admin <br/> Dar Mamie Dida</span>
+        <span className="font-bold text-blue-700">Espace Admin <br /> <b>Dar Mamie Dida </b> </span>
       </div>
     </>
   );
