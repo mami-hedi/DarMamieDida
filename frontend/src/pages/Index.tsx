@@ -4,6 +4,11 @@ import { useTranslation } from "react-i18next";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, Users, Home as HomeIcon } from "lucide-react";
+
+// Import de la Lightbox
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 import heroImage from "@/assets/gallery/photo7.jpeg";
 import gallery1 from "@/assets/gallery/photo1.jpeg";
 import gallery2 from "@/assets/gallery/photo2.jpeg";
@@ -28,6 +33,8 @@ const Index = () => {
   const { t } = useTranslation();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [photoIndex, setPhotoIndex] = useState(-1);
 
   // 🔹 Fetch first 3 rooms
   useEffect(() => {
@@ -124,7 +131,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Gallery Section Modifiée */}
       <section className="section-padding bg-background">
         <div className="container-custom">
           <div className="text-center mb-12">
@@ -139,17 +146,32 @@ const Index = () => {
             {galleryImages.map((img, index) => (
               <div
                 key={index}
-                className="relative overflow-hidden rounded-2xl aspect-square group shadow-md"
+                className="relative overflow-hidden rounded-2xl aspect-square group shadow-md cursor-pointer"
+                onClick={() => setPhotoIndex(index)}
               >
                 <img
                   src={img}
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                   <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white scale-75 group-hover:scale-100 transition-transform duration-300">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                   </div>
+                </div>
               </div>
             ))}
           </div>
+
+          {/* Lightbox Component */}
+          <Lightbox
+            index={photoIndex}
+            open={photoIndex >= 0}
+            close={() => setPhotoIndex(-1)}
+            slides={galleryImages.map(img => ({ src: img }))}
+          />
+
           <div className="text-center mt-12">
             <Button asChild variant="outline" size="lg">
               <Link to="/galerie" className="flex items-center gap-2">
