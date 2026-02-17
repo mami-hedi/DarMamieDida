@@ -108,7 +108,7 @@ const ADMIN_PHONE = "21658146177"; // Remplacez par votre numéro tunisien (ex: 
   e.preventDefault();
 
   // Remplacer par votre numéro (format: 216XXXXXXXX pour la Tunisie)
-  const ADMIN_PHONE = "216XXXXXXXX"; 
+  const ADMIN_PHONE = "21658146177"; 
 
   if (!formData.phone || /^\+\d{1,4}$/.test(formData.phone)) {
     toast({
