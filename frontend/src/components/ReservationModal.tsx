@@ -104,123 +104,100 @@ const ADMIN_PHONE = "21658146177"; // Remplacez par votre numéro tunisien (ex: 
       : "bg-green-200 text-green-800 rounded-full";
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  // Remplacer par votre numéro (format: 216XXXXXXXX pour la Tunisie)
-  const ADMIN_PHONE = "21658146177"; 
-
-  if (!formData.phone || /^\+\d{1,4}$/.test(formData.phone)) {
-    toast({
-      title: t("reservation.modal.invalidPhoneTitle"),
-      description: t("reservation.modal.invalidPhoneDesc"),
-      variant: "destructive",
-    });
-    return;
-  }
-
-  if (!checkinDate || !checkoutDate) {
-    toast({
-      title: t("reservation.modal.errorTitle"),
-      description: t("reservation.modal.errorDates"),
-      variant: "destructive",
-    });
-    return;
-  }
-
-  if (checkoutDate <= checkinDate) {
-    toast({
-      title: t("reservation.modal.errorTitle"),
-      description: t("reservation.modal.checkoutAfterCheckin"),
-      variant: "destructive",
-    });
-    return;
-  }
-
-  const todayCheck = new Date();
-  todayCheck.setHours(0, 0, 0, 0);
-  if (checkinDate < todayCheck) {
-    toast({
-      title: t("reservation.modal.errorTitle"),
-      description: t("reservation.modal.checkinPast"),
-      variant: "destructive",
-    });
-    return;
-  }
-
-  setIsSubmitting(true);
-
-  const checkin = formatDateLocal(checkinDate);
-  const checkout = formatDateLocal(checkoutDate);
-
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/reservations`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        room_id: room.id,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        checkin,
-        checkout,
-        nights,
-        total,
-        message: formData.message,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
+    if (!formData.phone || /^\+\d{1,4}$/.test(formData.phone)) {
       toast({
-        title: t("reservation.modal.errorTitle"),
-        description: data.error || t("reservation.modal.errorServer"),
+        title: t("reservation.modal.invalidPhoneTitle"),
+        description: t("reservation.modal.invalidPhoneDesc"),
         variant: "destructive",
       });
-      setIsSubmitting(false);
       return;
     }
 
-    // --- ENVOI WHATSAPP (SOLUTION GRATUITE) ---
-    const whatsappMsg = 
-      `🔔 *Nouvelle Réservation - Dar Mamie Dida*\n\n` +
-      `👤 *Client:* ${formData.name}\n` +
-      `🏠 *Chambre:* ${room.name}\n` +
-      `📅 *Arrivée:* ${checkin}\n` +
-      `📅 *Départ:* ${checkout}\n` +
-      `🌙 *Nuits:* ${nights}\n` +
-      `💰 *Total:* ${total} DT\n` +
-      `📞 *Tél:* ${formData.phone}\n` +
-      (formData.message ? `💬 *Note:* ${formData.message}` : "");
+    if (!checkinDate || !checkoutDate) {
+      toast({
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.errorDates"),
+        variant: "destructive",
+      });
+      return;
+    }
 
-    const encodedMsg = encodeURIComponent(whatsappMsg);
-    const whatsappUrl = `https://wa.me/${ADMIN_PHONE}?text=${encodedMsg}`;
+    if (checkoutDate <= checkinDate) {
+      toast({
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.checkoutAfterCheckin"),
+        variant: "destructive",
+      });
+      return;
+    }
 
-    // On ouvre WhatsApp dans un nouvel onglet
-    window.open(whatsappUrl, "_blank");
+    const todayCheck = new Date();
+    todayCheck.setHours(0, 0, 0, 0);
+    if (checkinDate < todayCheck) {
+      toast({
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.checkinPast"),
+        variant: "destructive",
+      });
+      return;
+    }
 
-    // --- FIN WHATSAPP ---
+    setIsSubmitting(true);
 
-    toast({
-      title: t("reservation.modal.successTitle"),
-      description: t("reservation.modal.successDesc", { checkin, checkout, nights }),
-    });
+    const checkin = formatDateLocal(checkinDate);
+    const checkout = formatDateLocal(checkoutDate);
 
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setCheckinDate(null);
-    setCheckoutDate(null);
-    setOpen(false);
-  } catch {
-    toast({
-      title: t("reservation.modal.errorTitle"),
-      description: t("reservation.modal.errorServer"),
-      variant: "destructive",
-    });
-  }
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/reservations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          room_id: room.id,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          checkin,
+          checkout,
+          nights,
+          total,
+          message: formData.message,
+        }),
+      });
 
-  setIsSubmitting(false);
-};
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast({
+          title: t("reservation.modal.errorTitle"),
+          description: data.error || t("reservation.modal.errorServer"),
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      toast({
+        title: t("reservation.modal.successTitle"),
+        description: t("reservation.modal.successDesc", { checkin, checkout, nights }),
+      });
+
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setCheckinDate(null);
+      setCheckoutDate(null);
+      setOpen(false);
+    } catch {
+      toast({
+        title: t("reservation.modal.errorTitle"),
+        description: t("reservation.modal.errorServer"),
+        variant: "destructive",
+      });
+    }
+
+    setIsSubmitting(false);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
