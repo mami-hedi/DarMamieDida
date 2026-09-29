@@ -13,6 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Sidebar } from "@/components/Sidebar";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
+
 interface Room {
   id: number;
   slug: string;
@@ -43,7 +45,7 @@ export function AdminTarifs() {
   const fetchRooms = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/admin/rooms");
+      const res = await fetch(`${BACKEND_URL}/api/admin/rooms`);
       if (!res.ok) throw new Error();
       const data = await res.json();
       setRooms(data);
@@ -87,8 +89,8 @@ export function AdminTarifs() {
 
     try {
       const url = editingRoom
-        ? `http://localhost:3000/api/admin/rooms/${editingRoom.id}`
-        : "http://localhost:3000/api/admin/rooms";
+        ? `${BACKEND_URL}/api/admin/rooms/${editingRoom.id}`
+        : `${BACKEND_URL}/api/admin/rooms`;
 
       const method = editingRoom ? "PUT" : "POST";
 
@@ -146,7 +148,7 @@ export function AdminTarifs() {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/admin/rooms/${id}`,
+        `${BACKEND_URL}/api/admin/rooms/${id}`,
         { method: "DELETE" }
       );
 
@@ -172,7 +174,7 @@ export function AdminTarifs() {
   // ======================
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar active="tarifs" />
+      <Sidebar />
 
       <main className="flex-1 p-4 md:p-8 pt-20 md:pt-8">
         <h1 className="text-3xl font-bold text-center mb-6">

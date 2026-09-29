@@ -3,7 +3,8 @@ export interface Day {
   available: boolean;
 }
 
-const API_URL = "http://localhost:3000/api/reservations";
+const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
+const API_URL = `${BACKEND_URL}/api/reservations`;
 
 export async function getDays(year?: number, month?: number): Promise<Day[]> {
   const url = new URL(`${API_URL}/days`);
