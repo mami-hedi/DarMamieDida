@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, Users, Home as HomeIcon } from "lucide-react";
+import { BookingBar } from "@/components/BookingBar";
+import { ArrowRight, Star, Users, Home as HomeIcon, Coffee, Wifi, Car } from "lucide-react";
 
-// Import de la Lightbox
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -29,21 +29,31 @@ interface Room {
 
 const BACKEND_URL = import.meta.env.VITE_API_URL || "https://darmamiedida.onrender.com";
 
+const perks = [
+  { key: "breakfast", Icon: Coffee, label: "Petit-déjeuner" },
+  { key: "wifi", Icon: Wifi, label: "Wi-Fi gratuit" },
+  { key: "parking", Icon: Car, label: "Parking privé" },
+] as const;
+
+const features = [
+  { key: "rooms", Icon: HomeIcon },
+  { key: "service", Icon: Star },
+  { key: "family", Icon: Users },
+] as const;
+
 const Index = () => {
   const { t } = useTranslation();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(true);
-
   const [photoIndex, setPhotoIndex] = useState(-1);
 
-  // 🔹 Fetch first 3 rooms
   useEffect(() => {
     const fetchRooms = async () => {
       try {
         const res = await fetch(`${BACKEND_URL}/api/rooms`);
         if (!res.ok) throw new Error("Impossible de récupérer les chambres");
         const data: Room[] = await res.json();
-        setRooms(data.slice(0, 3)); // seulement les 3 premières
+        setRooms(data.slice(0, 3));
       } catch (err) {
         console.error(err);
       } finally {
@@ -55,33 +65,48 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Hero + barre de réservation */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-24">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
-          <div className="absolute inset-0 bg-foreground/50" />
+          {/* Dégradé : texte lisible en haut et en bas, photo vivante au centre */}
+          <div className="absolute inset-0 bg-gradient-to-b from-foreground/55 via-foreground/25 to-foreground/65" />
         </div>
+
         <div className="relative z-10 text-center container-custom">
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-background mb-6 animate-fade-in">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-background mb-6 drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] animate-fade-in">
             {t("hero.title")}
           </h1>
-          <p className="font-body text-lg md:text-xl text-background/90 max-w-2xl mx-auto mb-10 animate-fade-in animate-delay-200">
+          <p className="font-body text-lg md:text-xl text-background/90 max-w-2xl mx-auto mb-12 animate-fade-in animate-delay-200">
             {t("hero.subtitle")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in animate-delay-300">
-            <Button asChild variant="hero" size="lg">
-              <Link to="/chambres">{t("hero.btnRooms")}</Link>
-            </Button>
-            <Button asChild variant="hero-outline" size="lg">
-              <Link to="/disponibilite">{t("hero.btnAvailability")}</Link>
-            </Button>
+
+          <div className="animate-fade-in animate-delay-300">
+            <BookingBar />
+
+            <ul className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 font-body text-sm text-background/90">
+              {perks.map(({ key, Icon, label }) => (
+                <li key={key} className="flex items-center gap-2">
+                  <Icon className="w-4 h-4" />
+                  {t(`hero.perks.${key}`, label)}
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to="/chambres"
+              className="inline-flex items-center gap-2 mt-6 font-body text-background underline-offset-4 hover:underline"
+            >
+              {t("hero.btnRooms")}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Welcome Section */}
+      {/* Welcome */}
       <section className="section-padding bg-secondary">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
@@ -93,45 +118,25 @@ const Index = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <HomeIcon className="w-8 h-8 text-primary" />
+              {features.map(({ key, Icon }) => (
+                <div key={key} className="text-center">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold mb-2">
+                    {t(`welcome.features.${key}.title`)}
+                  </h3>
+                  <p className="font-body text-sm text-muted-foreground">
+                    {t(`welcome.features.${key}.description`)}
+                  </p>
                 </div>
-                <h3 className="font-display text-xl font-semibold mb-2">
-                  {t("welcome.features.rooms.title")}
-                </h3>
-                <p className="font-body text-sm text-muted-foreground">
-                  {t("welcome.features.rooms.description")}
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-display text-xl font-semibold mb-2">
-                  {t("welcome.features.service.title")}
-                </h3>
-                <p className="font-body text-sm text-muted-foreground">
-                  {t("welcome.features.service.description")}
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-display text-xl font-semibold mb-2">
-                  {t("welcome.features.family.title")}
-                </h3>
-                <p className="font-body text-sm text-muted-foreground">
-                  {t("welcome.features.family.description")}
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery Section Modifiée */}
+      {/* Gallery */}
       <section className="section-padding bg-background">
         <div className="container-custom">
           <div className="text-center mb-12">
@@ -144,32 +149,28 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((img, index) => (
-              <div
+              <button
+                type="button"
                 key={index}
-                className="relative overflow-hidden rounded-2xl aspect-square group shadow-md cursor-pointer"
+                className="relative overflow-hidden rounded-2xl aspect-square group shadow-md"
                 onClick={() => setPhotoIndex(index)}
+                aria-label={`${t("gallery.title")} ${index + 1}`}
               >
                 <img
                   src={img}
-                  alt={`Gallery ${index + 1}`}
+                  alt={`Dar Mamie Dida ${index + 1}`}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                   <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white scale-75 group-hover:scale-100 transition-transform duration-300">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                   </div>
-                </div>
-              </div>
+              </button>
             ))}
           </div>
 
-          {/* Lightbox Component */}
           <Lightbox
             index={photoIndex}
             open={photoIndex >= 0}
             close={() => setPhotoIndex(-1)}
-            slides={galleryImages.map(img => ({ src: img }))}
+            slides={galleryImages.map((img) => ({ src: img }))}
           />
 
           <div className="text-center mt-12">
@@ -183,7 +184,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Rooms Section */}
+      {/* Chambres */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-12">
@@ -196,7 +197,9 @@ const Index = () => {
           </div>
 
           {loading ? (
-            <p className="text-center text-muted-foreground">Chargement des chambres...</p>
+            <p className="text-center text-muted-foreground">
+              {t("rooms.loading", "Chargement des chambres...")}
+            </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {rooms.map((room, index) => (
@@ -208,12 +211,9 @@ const Index = () => {
                 >
                   <div className="relative overflow-hidden rounded-lg aspect-[4/3]">
                     <img
-                      src={
-                        room.image
-                          ? `${BACKEND_URL}${room.image}`
-                          : "/placeholder-room.jpg"
-                      }
+                      src={room.image ? `${BACKEND_URL}${room.image}` : "/placeholder-room.jpg"}
                       alt={room.name}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
@@ -242,7 +242,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Reservation + Google Maps Section */}
+      {/* Réservation + carte */}
       <section className="section-padding bg-gray-100">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -259,14 +259,17 @@ const Index = () => {
 
             <div>
               <h2 className="font-display text-4xl md:text-5xl font-semibold mb-6 text-foreground">
-                {t("reservation.title")}
+                {t("reservation.title", "Réservez en quelques clics")}
               </h2>
               <p className="font-body text-muted-foreground max-w-xl mb-8 leading-relaxed">
-                {t("reservation.description")}
+                {t(
+                  "reservation.description",
+                  "Choisissez vos dates, découvrez les chambres libres et réservez directement auprès de nous."
+                )}
               </p>
               <Button asChild variant="hero" size="lg">
                 <Link to="/disponibilite" className="flex items-center gap-2">
-                  {t("reservation.btn")}
+                  {t("reservation.btn", "Vérifier les disponibilités")}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>

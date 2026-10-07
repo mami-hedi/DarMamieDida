@@ -3,7 +3,7 @@ import { FaTachometerAlt, FaUser, FaCalendarAlt, FaSignOutAlt, FaBed } from "rea
 import { useNavigate } from "react-router-dom";
 import { AdminNotifications } from "@/components/AdminNotifications";
 
-type ActivePage = "reservations" | "clients" | "disponibilite" | "dashboard" | "rooms";
+type ActivePage = "reservations" | "clients" | "disponibilite" | "dashboard" | "rooms" | "calendar";
 
 interface SidebarProps {
   active?: ActivePage;
@@ -19,6 +19,7 @@ export function Sidebar({ active }: SidebarProps) {
     { key: "rooms",          label: "Chambres",       icon: <FaBed />,           path: "/admin/rooms" },
     { key: "clients",        label: "Clients",        icon: <FaUser />,          path: "/admin/clients" },
     { key: "disponibilite",  label: "Disponibilité",  icon: <FaCalendarAlt />,   path: "/admin/availability" },
+    { key: "calendar",       label: "Calendrier",     icon: <FaCalendarAlt />,   path: "/admin/calendar" },
   ];
 
   return (

@@ -21,6 +21,7 @@ import { AdminAvailability } from "./pages/AdminAvailability";
 import { AdminDashboard } from "@/pages/AdminDashboard";
 import { AdminLogin } from "./pages/AdminLogin";
 import { AdminRooms } from "@/pages/AdminRooms";
+import { AdminCalendar } from "@/pages/AdminCalendar";
 
 import ChatBotPage from "./pages/ChatBotPage";
 
@@ -100,6 +101,14 @@ const App = () => (
             element={
               <ProtectedAdminRoute>
                 <AdminRooms />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/calendar"
+            element={
+              <ProtectedAdminRoute>
+                <AdminCalendar />
               </ProtectedAdminRoute>
             }
           />

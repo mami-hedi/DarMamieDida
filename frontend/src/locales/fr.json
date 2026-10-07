@@ -3,15 +3,29 @@
     "title": "Dar Mamie Dida",
     "subtitle": "Une maison d’hôtes d’exception où l’élégance rencontre le confort. Découvrez un havre de paix au cœur de la tradition et du raffinement.",
     "btnRooms": "Découvrir nos chambres",
-    "btnAvailability": "Vérifier la disponibilité"
+    "btnAvailability": "Vérifier la disponibilité",
+    "perks": {
+      "breakfast": "Petit-déjeuner",
+      "wifi": "Wi-Fi gratuit",
+      "parking": "Parking privé"
+    },
+    "booking": {
+      "checkin": "Arrivée",
+      "checkout": "Départ",
+      "guests": "Voyageurs",
+      "submit": "Vérifier",
+      "night": "nuit",
+      "nights": "nuits",
+      "errorMissing": "Choisissez vos dates d’arrivée et de départ.",
+      "errorOrder": "Le départ doit être après l’arrivée."
+    }
   },
-
   "welcome": {
     "title": "Bienvenue chez nous",
     "description": "Nichée dans un cadre idyllique, Dar Mamie Dida vous ouvre ses portes pour un séjour inoubliable. Notre maison d’hôtes allie architecture traditionnelle et confort moderne, créant une atmosphère unique où chaque détail est pensé pour votre bien-être.",
     "features": {
       "rooms": {
-        "title": "6 Chambres uniques",
+        "title": "5 Chambres uniques",
         "description": "Chaque chambre possède son identité et son caractère."
       },
       "service": {
@@ -24,97 +38,135 @@
       }
     }
   },
-
   "services": {
-  "hero": {
-    "title": "Nos Services",
-    "subtitle": "Tout pour un séjour confortable et authentique"
-  },
-  "intro": {
-    "description": "Des prestations de qualité pour votre confort et votre bien-être."
-  },
-  "main": [
-    {
-      "title": "Petit-déjeuner",
-      "description": "Petit-déjeuner généreux préparé avec des produits frais et locaux, servi sur la terrasse."
+    "hero": {
+      "title": "Nos Services",
+      "subtitle": "Tout pour un séjour confortable et authentique"
     },
-    {
-      "title": "Wi-Fi gratuit",
-      "description": "Connexion Wi-Fi haut débit disponible dans toute la maison et les espaces extérieurs."
+    "intro": {
+      "description": "Des prestations de qualité pour votre confort et votre bien-être."
     },
-    {
-      "title": "Parking privé",
-      "description": "Stationnement gratuit et sécurisé pour tous nos hôtes."
-    },
-    {
-      "title": "Terrasses panoramiques",
-      "description": "Espaces extérieurs aménagés pour profiter du soleil et de la vue."
-    },
-    {
-      "title": "Cuisine locale",
-      "description": "Découverte de la cuisine tunisienne traditionnelle sur demande."
-    },
-    {
-      "title": "Service personnalisé",
-      "description": "Une attention particulière pour un séjour confortable et sur mesure."
-    }
-  ],
-  "breakfast": {
-    "title": "Un petit-déjeuner d’exception",
-    "description": "Des produits frais, locaux et faits maison pour bien commencer la journée dans un cadre paisible.",
-    "items": ["Produits locaux", "Fruits de saison", "Viennoiseries artisanales", "Vue panoramique"]
-  },
-  "activities": {
-    "title": "Activités & Découvertes",
-    "intro": "Découvrez nos activités et les merveilles environnantes pour enrichir votre séjour.",
-    "items": [
+    "main": [
       {
-        "title": "Plages & criques",
-        "description": "Accès rapide aux plages de sable fin et aux criques sauvages."
+        "title": "Petit-déjeuner",
+        "description": "Petit-déjeuner généreux préparé avec des produits frais et locaux, servi sur la terrasse."
       },
       {
-        "title": "Randonnées & balades",
-        "description": "Sentiers naturels offrant des panoramas exceptionnels."
+        "title": "Wi-Fi gratuit",
+        "description": "Connexion Wi-Fi haut débit disponible dans toute la maison et les espaces extérieurs."
       },
       {
-        "title": "Découvertes culturelles",
-        "description": "Villages traditionnels, sites historiques et artisanat local."
+        "title": "Parking privé",
+        "description": "Stationnement gratuit et sécurisé pour tous nos hôtes."
       },
       {
-        "title": "Gastronomie locale",
-        "description": "Restaurants typiques et spécialités régionales à proximité."
+        "title": "Terrasses panoramiques",
+        "description": "Espaces extérieurs aménagés pour profiter du soleil et de la vue."
+      },
+      {
+        "title": "Cuisine locale",
+        "description": "Découverte de la cuisine tunisienne traditionnelle sur demande."
+      },
+      {
+        "title": "Service personnalisé",
+        "description": "Une attention particulière pour un séjour confortable et sur mesure."
       }
-    ]
+    ],
+    "breakfast": {
+      "title": "Un petit-déjeuner d’exception",
+      "description": "Des produits frais, locaux et faits maison pour bien commencer la journée dans un cadre paisible.",
+      "items": [
+        "Produits locaux",
+        "Fruits de saison",
+        "Viennoiseries artisanales",
+        "Vue panoramique"
+      ]
+    },
+    "activities": {
+      "title": "Activités & Découvertes",
+      "intro": "Découvrez nos activités et les merveilles environnantes pour enrichir votre séjour.",
+      "items": [
+        {
+          "title": "Plages & criques",
+          "description": "Accès rapide aux plages de sable fin et aux criques sauvages."
+        },
+        {
+          "title": "Padel, golf & sports",
+          "description": "Courts de padel, parcours de golf et activités nautiques à proximité."
+        },
+        {
+          "title": "Thalasso & bien-être",
+          "description": "Centres de thalassothérapie et hammams, une spécialité de Hammamet."
+        },
+        {
+          "title": "Médina & culture",
+          "description": "Fort et médina de Hammamet, villages traditionnels et artisanat local."
+        },
+        {
+          "title": "Excursions au Cap Bon",
+          "description": "Poterie de Nabeul, côtes sauvages, et journées vers Carthage et Sidi Bou Saïd."
+        },
+        {
+          "title": "Gastronomie locale",
+          "description": "Restaurants typiques et spécialités régionales à proximité."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Prêt pour votre séjour ?",
+      "description": "Consultez nos chambres et réservez en quelques clics.",
+      "button": "Voir les chambres"
+    },
+    "onRequest": {
+      "title": "Services à la demande",
+      "intro": "Dites-nous ce dont vous avez besoin avant votre arrivée, nous nous occupons de l’organisation.",
+      "badge": "Sur demande",
+      "items": [
+        {
+          "title": "Transferts aéroport",
+          "description": "Un chauffeur vous attend à l’aéroport d’Enfidha-Hammamet ou de Tunis-Carthage et vous conduit jusqu’à la maison."
+        },
+        {
+          "title": "Location de voiture",
+          "description": "Une voiture à votre arrivée pour explorer Hammamet et le Cap Bon à votre rythme."
+        },
+        {
+          "title": "Excursions & guides",
+          "description": "Journées organisées vers Nabeul, le Cap Bon, Carthage et Sidi Bou Saïd."
+        },
+        
+        {
+          "title": "Conciergerie",
+          "description": "Réservation de restaurants, de taxis, de courts de padel ou de soins bien-être."
+        }
+      ],
+      "note": "Tarifs communiqués sur demande, selon la saison et la disponibilité.",
+      "button": "Demander un service"
+    }
   },
-  "cta": {
-    "title": "Prêt pour votre séjour ?",
-    "description": "Consultez nos chambres et réservez en quelques clics.",
-    "button": "Voir les chambres"
-  }
-},
-
-
   "rooms": {
     "title": "Nos Chambres",
     "description": "Découvrez nos chambres soigneusement décorées, chacune portant un prénom cher à notre cœur et offrant une expérience unique.",
     "btn": "Voir toutes les chambres",
     "price": "À partir de {{price}} DT / nuit",
-
+    "loading": "Chargement des chambres...",
     "hero": {
       "title": "Nos Chambres",
       "subtitle": "Cinq ambiances uniques pour un séjour d’exception"
     },
-
     "included": {
       "title": "Inclus dans chaque séjour",
-      "items": ["Petit-déjeuner", "Wi-Fi gratuit", "Parking", "Linge de maison"]
+      "items": [
+        "Petit-déjeuner",
+        "Wi-Fi gratuit",
+        "Parking",
+        "Linge de maison"
+      ]
     },
-
     "buttons": {
       "details": "Voir les détails",
       "reserve": "Réserver"
     },
-
     "detail": {
       "back": "Retour aux chambres",
       "people": "personnes",
@@ -122,30 +174,26 @@
       "descriptionTitle": "Description",
       "amenitiesTitle": "Équipements & services",
       "amenities": [
-    "Wi-Fi gratuit",
-    "Climatisation",
-    "Salle de bain privée",
-    "Télévision",
-    "Petit déjeuner inclus"
-  ]
+        "Wi-Fi gratuit",
+        "Climatisation",
+        "Salle de bain privée",
+        "Télévision",
+        "Petit déjeuner inclus"
+      ]
     }
   },
-
   "gallery": {
     "title": "Un aperçu de notre maison",
     "description": "Plongez dans l’atmosphère élégante et authentique de Dar Mamie Dida à travers une sélection d’images de nos espaces.",
     "btn": "Voir la galerie complète",
-
     "hero": {
       "title": "Galerie",
       "subtitle": "Découvrez nos chambres et espaces en images"
     },
-
     "video": {
       "title": "Découvrez notre vidéo",
       "description": "Un aperçu de nos chambres, espaces communs et expériences proposées."
     },
-
     "photosAlt": [
       "Photo chambre 1",
       "Photo chambre 2",
@@ -161,11 +209,13 @@
       "Photo chambre 12"
     ]
   },
-
   "reservation": {
+    "title": "Réservez en quelques clics",
+    "description": "Choisissez vos dates, découvrez les chambres libres et réservez directement auprès de nous.",
+    "btn": "Vérifier les disponibilités",
     "modal": {
       "title": "Réserver la chambre",
-      "subtitle": "Remplissez le formulaire ci-dessous pour réserver votre séjour",
+      "subtitle": "Veuillez remplir le formulaire pour réserver",
       "pricePerNight": "Prix par nuit",
       "capacity": "Capacité",
       "fullName": "Nom complet",
@@ -179,22 +229,20 @@
       "message": "Message (optionnel)",
       "submitting": "Enregistrement...",
       "confirm": "Confirmer la réservation",
-      "subtitle": "Veuillez remplir le formulaire pour réserver",
       "priceSuffix": "/ nuit",
       "submit": "Réserver maintenant",
       "note": "Vous recevrez une confirmation après la réservation.",
       "invalidPhoneTitle": "Numéro invalide",
-      "invalidPhoneDesc": "Le téléphone ne peut pas être vide ni contenir seulement l'indicatif.",
+      "invalidPhoneDesc": "Le téléphone ne peut pas être vide ni contenir seulement l’indicatif.",
       "errorTitle": "Erreur",
-      "errorDates": "Veuillez sélectionner une date d'arrivée et de départ.",
-      "checkoutAfterCheckin": "La date de départ doit être après la date d'arrivée.",
-      "checkinPast": "La date d'arrivée ne peut pas être dans le passé.",
+      "errorDates": "Veuillez sélectionner une date d’arrivée et de départ.",
+      "checkoutAfterCheckin": "La date de départ doit être après la date d’arrivée.",
+      "checkinPast": "La date d’arrivée ne peut pas être dans le passé.",
       "errorServer": "Le serveur ne répond pas.",
       "successTitle": "Réservation enregistrée",
       "successDesc": "Votre séjour du {{checkin}} au {{checkout}} ({{nights}} nuits) est confirmé."
     }
   },
-
   "nav": {
     "home": "Accueil",
     "about": "À propos",
@@ -202,9 +250,8 @@
     "services": "Services",
     "rooms": "Nos chambres",
     "contact": "Contact",
-    "availability": "Verifier Disponibilités"
+    "availability": "Vérifier disponibilités"
   },
-
   "footer": {
     "description": "Une maison d’hôtes d’exception où le confort rencontre l’élégance. Votre havre de paix pour un séjour inoubliable.",
     "otherLinks": "Autres liens",
@@ -213,7 +260,6 @@
     "address": "Cité Nouira Avenue Hedi Nouira 8050 Hammamet, Tunisie",
     "rights": "Tous droits réservés"
   },
-
   "about": {
     "hero": {
       "title": "À propos",
@@ -261,7 +307,6 @@
       "p2": "Notre objectif : vous donner envie de revenir."
     }
   },
-
   "contact": {
     "hero": {
       "title": "Contact",
@@ -296,7 +341,7 @@
   },
   "availability": {
     "title": "Vérifier la disponibilité",
-    "checkin": "Date d'arrivée",
+    "checkin": "Date d’arrivée",
     "checkout": "Date de départ",
     "search": "Rechercher",
     "alert": {
@@ -304,24 +349,23 @@
       "checkoutAfterCheckin": "La date de départ doit être après la date d’arrivée."
     }
   },
-  
   "checkRooms": {
     "title": "Vérifier les chambres disponibles",
+    "subtitle": "Choisissez vos dates, on vous montre les chambres libres à Dar Mamie Dida.",
     "loading": "Chargement...",
-    "availableRooms": "Chambres Disponibles",
+    "availableRooms": "Chambres disponibles",
     "noRooms": "Aucune chambre à afficher",
     "reserve": "Réserver",
     "currency": "TND",
     "night": "nuit",
+    "nights": "nuits",
     "alert": {
       "pastDate": "Vous ne pouvez pas sélectionner une date passée.",
-      "checkoutAfterCheckin": "La date de départ doit être après la date d'arrivée.",
+      "checkoutAfterCheckin": "La date de départ doit être après la date d’arrivée.",
       "serverError": "Erreur serveur",
       "invalidData": "Format des données invalide."
     }
-  }
-,
-
+  },
   "faq": {
     "hero": {
       "title": "FAQ",

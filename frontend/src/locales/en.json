@@ -3,15 +3,29 @@
     "title": "Dar Mamie Dida",
     "subtitle": "An exceptional guesthouse where elegance meets comfort. Discover a peaceful haven at the heart of tradition and refinement.",
     "btnRooms": "Discover our rooms",
-    "btnAvailability": "Check Availability"
+    "btnAvailability": "Check Availability",
+    "perks": {
+      "breakfast": "Breakfast",
+      "wifi": "Free Wi-Fi",
+      "parking": "Private parking"
+    },
+    "booking": {
+      "checkin": "Check-in",
+      "checkout": "Check-out",
+      "guests": "Guests",
+      "submit": "Check",
+      "night": "night",
+      "nights": "nights",
+      "errorMissing": "Choose your check-in and check-out dates.",
+      "errorOrder": "Check-out must be after check-in."
+    }
   },
-
   "welcome": {
     "title": "Welcome to our home",
     "description": "Nestled in an idyllic setting, Dar Mamie Dida opens its doors for an unforgettable stay. Our guesthouse combines traditional architecture with modern comfort, creating a unique atmosphere where every detail is designed for your well-being.",
     "features": {
       "rooms": {
-        "title": "6 Unique Rooms",
+        "title": "5 Unique Rooms",
         "description": "Each room has its own identity and unique character."
       },
       "service": {
@@ -25,94 +39,134 @@
     }
   },
   "services": {
-  "hero": {
-    "title": "Our Services",
-    "subtitle": "Everything for a comfortable and authentic stay"
-  },
-  "intro": {
-    "description": "High-quality services for your comfort and well-being."
-  },
-  "main": [
-    {
-      "title": "Breakfast",
-      "description": "Generous breakfast prepared with fresh and local products, served on the terrace."
+    "hero": {
+      "title": "Our Services",
+      "subtitle": "Everything for a comfortable and authentic stay"
     },
-    {
-      "title": "Free Wi-Fi",
-      "description": "High-speed Wi-Fi available throughout the house and outdoor areas."
+    "intro": {
+      "description": "High-quality services for your comfort and well-being."
     },
-    {
-      "title": "Private Parking",
-      "description": "Free and secure parking for all our guests."
-    },
-    {
-      "title": "Panoramic Terraces",
-      "description": "Outdoor spaces designed to enjoy the sun and the view."
-    },
-    {
-      "title": "Local Cuisine",
-      "description": "Discover traditional Tunisian cuisine on request."
-    },
-    {
-      "title": "Personalized Service",
-      "description": "Special attention for a comfortable and tailored stay."
-    }
-  ],
-  "breakfast": {
-    "title": "An Exceptional Breakfast",
-    "description": "Fresh, local, homemade products to start your day in a peaceful setting.",
-    "items": ["Local products", "Seasonal fruits", "Artisanal pastries", "Panoramic view"]
-  },
-  "activities": {
-    "title": "Activities & Discoveries",
-    "intro": "Discover our activities and nearby wonders to enrich your stay.",
-    "items": [
+    "main": [
       {
-        "title": "Beaches & Coves",
-        "description": "Quick access to sandy beaches and wild coves."
+        "title": "Breakfast",
+        "description": "Generous breakfast prepared with fresh and local products, served on the terrace."
       },
       {
-        "title": "Hiking & Walks",
-        "description": "Natural trails offering exceptional panoramas."
+        "title": "Free Wi-Fi",
+        "description": "High-speed Wi-Fi available throughout the house and outdoor areas."
       },
       {
-        "title": "Cultural Discoveries",
-        "description": "Traditional villages, historical sites, and local crafts."
+        "title": "Private Parking",
+        "description": "Free and secure parking for all our guests."
       },
       {
-        "title": "Local Gastronomy",
-        "description": "Typical restaurants and regional specialties nearby."
+        "title": "Panoramic Terraces",
+        "description": "Outdoor spaces designed to enjoy the sun and the view."
+      },
+      {
+        "title": "Local Cuisine",
+        "description": "Discover traditional Tunisian cuisine on request."
+      },
+      {
+        "title": "Personalized Service",
+        "description": "Special attention for a comfortable and tailored stay."
       }
-    ]
+    ],
+    "breakfast": {
+      "title": "An Exceptional Breakfast",
+      "description": "Fresh, local, homemade products to start your day in a peaceful setting.",
+      "items": [
+        "Local products",
+        "Seasonal fruits",
+        "Artisanal pastries",
+        "Panoramic view"
+      ]
+    },
+    "activities": {
+      "title": "Activities & Discoveries",
+      "intro": "Discover our activities and nearby wonders to enrich your stay.",
+      "items": [
+        {
+          "title": "Beaches & Coves",
+          "description": "Quick access to sandy beaches and wild coves."
+        },
+        {
+          "title": "Padel, golf & sports",
+          "description": "Padel courts, golf courses and water sports nearby."
+        },
+        {
+          "title": "Thalasso & wellness",
+          "description": "Thalassotherapy centres and hammams, a Hammamet speciality."
+        },
+        {
+          "title": "Medina & culture",
+          "description": "Hammamet fort and medina, traditional villages and local crafts."
+        },
+        {
+          "title": "Cap Bon excursions",
+          "description": "Nabeul pottery, wild coastline, and day trips to Carthage and Sidi Bou Said."
+        },
+        {
+          "title": "Local Gastronomy",
+          "description": "Typical restaurants and regional specialties nearby."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready for your stay?",
+      "description": "Check our rooms and book in a few clicks.",
+      "button": "See the rooms"
+    },
+    "onRequest": {
+      "title": "On-request services",
+      "intro": "Tell us what you need before you arrive and we will take care of the organisation.",
+      "badge": "On request",
+      "items": [
+        {
+          "title": "Airport transfers",
+          "description": "A driver meets you at Enfidha-Hammamet or Tunis-Carthage airport and takes you to the house."
+        },
+        {
+          "title": "Car rental",
+          "description": "A car waiting on arrival to explore Hammamet and Cap Bon at your own pace."
+        },
+        {
+          "title": "Excursions & guides",
+          "description": "Organised days out to Nabeul, Cap Bon, Carthage and Sidi Bou Said."
+        },
+       
+        {
+          "title": "Concierge",
+          "description": "Booking restaurants, taxis, padel courts or wellness treatments."
+        }
+      ],
+      "note": "Prices are given on request, depending on the season and availability.",
+      "button": "Request a service"
+    }
   },
-  "cta": {
-    "title": "Ready for your stay?",
-    "description": "Check our rooms and book in a few clicks.",
-    "button": "See the rooms"
-  }
-},
-
   "rooms": {
     "title": "Our Rooms",
     "description": "Discover our carefully decorated rooms, each bearing a name dear to our heart and offering a unique experience.",
     "btn": "View all rooms",
-    "price": "From {{price}}DT / night",
-
+    "price": "From {{price}} DT / night",
+    "loading": "Loading rooms...",
     "hero": {
       "title": "Our Rooms",
       "subtitle": "Five unique atmospheres for an exceptional stay"
     },
-
     "included": {
       "title": "Included in every stay",
-      "items": ["Breakfast", "Free Wi-Fi", "Parking", "House linen"]
+      "items": [
+        "Breakfast",
+        "Free Wi-Fi",
+        "Parking",
+        "House linen"
+      ]
     },
-
     "buttons": {
       "details": "View details",
       "reserve": "Reserve"
     },
-
     "detail": {
       "back": "Back to rooms",
       "people": "people",
@@ -120,30 +174,26 @@
       "descriptionTitle": "Description",
       "amenitiesTitle": "Amenities & Services",
       "amenities": [
-    "Free Wi-Fi",
-    "Air conditioning",
-    "Private bathroom",
-    "Television",
-    "Breakfast included"
-  ]
+        "Free Wi-Fi",
+        "Air conditioning",
+        "Private bathroom",
+        "Television",
+        "Breakfast included"
+      ]
     }
   },
-
   "gallery": {
     "title": "A glimpse of our guesthouse",
     "description": "Immerse yourself in the elegant and authentic atmosphere of Dar Mamie Dida through a selection of images from our spaces.",
     "btn": "View full gallery",
-
     "hero": {
       "title": "Gallery",
       "subtitle": "Discover our rooms and spaces through our gallery"
     },
-
     "video": {
       "title": "Discover our video",
       "description": "A glimpse of our rooms, common areas, and the experiences we offer."
     },
-
     "photosAlt": [
       "Room photo 1",
       "Room photo 2",
@@ -159,11 +209,13 @@
       "Room photo 12"
     ]
   },
-
   "reservation": {
+    "title": "Book in a few clicks",
+    "description": "Pick your dates, see which rooms are free and book directly with us.",
+    "btn": "Check availability",
     "modal": {
       "title": "Book this room",
-      "subtitle": "Fill out the form below to reserve your stay",
+      "subtitle": "Please fill the form to book",
       "pricePerNight": "Price per night",
       "capacity": "Capacity",
       "fullName": "Full Name",
@@ -177,7 +229,6 @@
       "message": "Message (optional)",
       "submitting": "Submitting...",
       "confirm": "Confirm reservation",
-      "subtitle": "Please fill the form to book",
       "priceSuffix": "/ night",
       "submit": "Book Now",
       "note": "You will receive a confirmation after booking.",
@@ -192,16 +243,15 @@
       "successDesc": "Your stay from {{checkin}} to {{checkout}} ({{nights}} nights) is confirmed."
     }
   },
-
   "nav": {
     "home": "Home",
     "about": "About",
     "gallery": "Gallery",
+    "services": "Services",
     "rooms": "Our Rooms",
     "contact": "Contact",
     "availability": "Check Availability"
   },
-
   "footer": {
     "description": "An exceptional guesthouse where comfort meets elegance. Your haven of peace for an unforgettable stay.",
     "otherLinks": "Other links",
@@ -210,7 +260,6 @@
     "address": "Cité Nouira Avenue Hedi Nouira 8050 Hammamet, Tunisia",
     "rights": "All rights reserved"
   },
-
   "about": {
     "hero": {
       "title": "About",
@@ -258,7 +307,6 @@
       "p2": "Our goal: to make you want to come back."
     }
   },
-
   "contact": {
     "hero": {
       "title": "Contact",
@@ -303,22 +351,21 @@
   },
   "checkRooms": {
     "title": "Check Available Rooms",
+    "subtitle": "Choose your dates and we will show you the free rooms at Dar Mamie Dida.",
     "loading": "Loading...",
     "availableRooms": "Available Rooms",
     "noRooms": "No rooms to display",
     "reserve": "Reserve",
     "currency": "TND",
     "night": "night",
+    "nights": "nights",
     "alert": {
       "pastDate": "You cannot select a past date.",
       "checkoutAfterCheckin": "Check-out date must be after check-in date.",
       "serverError": "Server error",
       "invalidData": "Invalid data format."
     }
-  
-}
-,
-
+  },
   "faq": {
     "hero": {
       "title": "FAQ",
@@ -335,7 +382,7 @@
       },
       {
         "question": "What are the check-in and check-out times?",
-        "answer": "Check-in is available from 2:00 PM and check-out must be completed before 11:00 AM."
+        "answer": "Check-in is available from 3:00 PM and check-out must be completed before 11:00 AM."
       },
       {
         "question": "Is breakfast included?",

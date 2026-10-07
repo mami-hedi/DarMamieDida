@@ -8,6 +8,7 @@ import roomsRoutes from "./routes/roomsRoutes";
 import chatRoutes from "./routes/chatRoutes";
 import adminRoomsRouter from "./routes/adminRoomsRoutes";
 import adminGalleryRouter from "./routes/adminGalleryRoutes";
+import adminCalendarRouter, { initCalendarTables } from "./routes/adminCalendarRoutes";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -74,6 +75,8 @@ app.use("/api/admin/rooms", adminRoomsRouter);
 
 app.use("/api/admin/gallery", adminGalleryRouter); // ← route pour gérer galerie
 
+app.use("/api/admin/calendar", adminCalendarRouter); // ← tarifs & blocage de dates
+
 // Routes Front-end client
 app.use("/api/reservations", reservationRoutes);
 
@@ -104,3 +107,12 @@ server.listen(PORT, () => {
   console.log(`✅ Backend running on http://localhost:${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || "development"}`);
 });
+
+// Initialisation des tables calendar (idempotent : CREATE TABLE IF NOT EXISTS)
+(async () => {
+  try {
+    await initCalendarTables();
+  } catch (err) {
+    console.error("❌ Erreur lors de l'initialisation des tables calendar :", err);
+  }
+})();

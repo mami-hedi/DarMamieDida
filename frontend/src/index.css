@@ -1,11 +1,10 @@
-/* 1️⃣ Import de Google Fonts en premier */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+/* 1️⃣ Google Fonts en premier */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-/* 2️⃣ Ensuite Tailwind directives */
+/* 2️⃣ Directives Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @layer base {
   :root {
@@ -93,6 +92,11 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* évite que le header masque les ancres */
+  }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
@@ -101,15 +105,6 @@
     @apply font-display;
   }
 }
-
-.available-day {
-  @apply bg-green-100 text-green-800 rounded-full;
-}
-
-.unavailable-day {
-  @apply bg-red-100 text-red-800 rounded-full;
-}
-
 
 @layer utilities {
   .font-display {
@@ -135,65 +130,65 @@
   }
 }
 
-/* Animations */
+/* ---------- Animations ---------- */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
+/* "both" : l'élément reste invisible pendant le délai (plus de clignotement) */
+.animate-fade-in  { animation: fade-in 0.6s ease-out both; }
+.animate-slide-up { animation: slide-up 0.8s ease-out both; }
+.animate-scale-in { animation: scale-in 0.5s ease-out both; }
+
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+
+/* Zoom lent de la photo du hero au chargement */
+@keyframes hero-zoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+.hero-zoom { animation: hero-zoom 12s ease-out forwards; }
+
+/* Accessibilité : moins d'animations si l'utilisateur le demande */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-zoom { animation: none; }
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in { animation: none; opacity: 1; transform: none; }
 }
 
-.animate-slide-up {
-  animation: slide-up 0.8s ease-out forwards;
+/* ---------- Calendrier de disponibilités ---------- */
+.available-day {
+  background-color: #d1fae5; /* vert clair */
+  color: #065f46;
+  border-radius: 9999px;
 }
 
-.animate-scale-in {
-  animation: scale-in 0.5s ease-out forwards;
+.unavailable-day {
+  background-color: #fee2e2; /* rouge clair */
+  color: #b91c1c;
+  border-radius: 9999px;
 }
 
-.animate-delay-100 {
-  animation-delay: 100ms;
+.react-datepicker__day--disabled,
+.checkout-disabled-day {
+  background-color: #e5e7eb !important;
+  color: #9ca3af !important;
+  border-radius: 50%;
+  cursor: not-allowed;
 }
-
-.animate-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animate-delay-300 {
-  animation-delay: 300ms;
-}
-
-.animate-delay-400 {
-  animation-delay: 400ms;
-}
-
