@@ -9,7 +9,9 @@ import chatRoutes from "./routes/chatRoutes";
 import adminRoomsRouter from "./routes/adminRoomsRoutes";
 import adminGalleryRouter from "./routes/adminGalleryRoutes";
 import adminCalendarRouter, { initCalendarTables } from "./routes/adminCalendarRoutes";
+import adminAuthRouter from "./routes/adminAuth.routes";
 import dotenv from "dotenv";
+// v2.1.0 — calendar routes + code splitting + auth fix
 
 dotenv.config();
 
@@ -70,6 +72,8 @@ app.use(express.json());
 
 app.use("/uploads", express.static("public/uploads"));
 
+// ── Auth admin ────────────────────────────────────────────────────────────────
+app.use("/api/admin/auth", adminAuthRouter);
 
 app.use("/api/admin/rooms", adminRoomsRouter);
 
