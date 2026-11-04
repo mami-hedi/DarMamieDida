@@ -4,7 +4,7 @@ import { db } from "../db";
 
 const router = Router();
 
-// 🔹 1️⃣ Chambres disponibles selon dates (PRIORITAIRE)
+// 🔹 1️⃣ Chambres disponibles selon dates (réservations + blocked_dates admin)
 router.get("/available", async (req, res) => {
   const { checkin, checkout } = req.query;
 
@@ -13,34 +13,43 @@ router.get("/available", async (req, res) => {
   }
 
   try {
-    const checkinDate = new Date(checkin as string).toISOString().split("T")[0];
+    const checkinDate  = new Date(checkin  as string).toISOString().split("T")[0];
     const checkoutDate = new Date(checkout as string).toISOString().split("T")[0];
 
+    // Exclut les chambres qui ont :
+    //   • une réservation confirmée/en attente qui chevauche la période
+    //   • OU un blocage admin qui chevauche la période
     const sql = `
       SELECT *
-FROM rooms
-WHERE is_active = 1
-  AND id NOT IN (
-    SELECT room_id
-    FROM reservations
-    WHERE status IN ('confirmed', 'pending')
-      AND NOT (
-        DATE(checkout) <= ?
-        OR DATE(checkin) >= ?
-      )
-  )
-ORDER BY name ASC
+      FROM rooms
+      WHERE is_active = 1
+        AND id NOT IN (
+          -- Réservations existantes
+          SELECT room_id
+          FROM reservations
+          WHERE status IN ('confirmed', 'pending')
+            AND NOT (DATE(checkout) <= ? OR DATE(checkin) >= ?)
+
+          UNION
+
+          -- Blocages admin (blocked_dates)
+          SELECT room_id
+          FROM blocked_dates
+          WHERE NOT (date_end < ? OR date_start >= ?)
+        )
+      ORDER BY name ASC
     `;
 
-    const [rooms] = await db.query(sql, [checkinDate, checkoutDate]);
+    const [rooms] = await db.query(sql, [
+      checkinDate, checkoutDate,  // pour les réservations
+      checkinDate, checkoutDate,  // pour les blocages
+    ]);
 
-    console.log("✅ DISPONIBILITÉ CHAMBRES");
-    console.log("checkin :", checkinDate, "checkout:", checkoutDate);
-
+    console.log("✅ DISPONIBILITÉ chambres | checkin:", checkinDate, "checkout:", checkoutDate);
     res.json(rooms);
 
   } catch (error: any) {
-    console.error("🔥 ERREUR SQL :", error);
+    console.error("🔥 ERREUR SQL disponibilité :", error);
     res.status(500).json({ error: error.message });
   }
 });
